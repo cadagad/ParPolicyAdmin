@@ -37,14 +37,14 @@ namespace ParPolicyAdmin.UserControls
             this.btnReviewDuplicates = new System.Windows.Forms.Button();
             this.btnReviewDeficient = new System.Windows.Forms.Button();
             this.pnlDescription = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tbLabel2 = new System.Windows.Forms.TextBox();
             this.tbLabel1 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSources)).BeginInit();
             this.pnlDescription.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +112,7 @@ namespace ParPolicyAdmin.UserControls
             this.btnReviewDeficient.TabIndex = 8;
             this.btnReviewDeficient.Text = "Review Deficient";
             this.btnReviewDeficient.UseVisualStyleBackColor = false;
+            this.btnReviewDeficient.Click += new System.EventHandler(this.btnReviewDeficient_Click);
             // 
             // pnlDescription
             // 
@@ -128,6 +129,59 @@ namespace ParPolicyAdmin.UserControls
             this.pnlDescription.Name = "pnlDescription";
             this.pnlDescription.Size = new System.Drawing.Size(369, 406);
             this.pnlDescription.TabIndex = 9;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(6, 288);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(358, 71);
+            this.textBox3.TabIndex = 10;
+            this.textBox3.Text = resources.GetString("textBox3.Text");
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(6, 220);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(358, 43);
+            this.textBox2.TabIndex = 9;
+            this.textBox2.Text = resources.GetString("textBox2.Text");
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.label3.Location = new System.Drawing.Point(3, 272);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Review Deficient:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(19, 133);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(345, 81);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // label2
             // 
@@ -181,59 +235,6 @@ namespace ParPolicyAdmin.UserControls
             this.tbLabel1.Text = "Select one or more sources to submit to CSTC  (hold down the CTRL key to select m" +
     "ultiple sources).   Alternatively, you can click on “Select All” to submit all r" +
     "ecords to CSTC";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(19, 133);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(345, 81);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label3.Location = new System.Drawing.Point(3, 272);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Review Deficient:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(6, 220);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(358, 43);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.Text = resources.GetString("textBox2.Text");
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(6, 288);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(358, 71);
-            this.textBox3.TabIndex = 10;
-            this.textBox3.Text = resources.GetString("textBox3.Text");
             // 
             // ucReviewData
             // 

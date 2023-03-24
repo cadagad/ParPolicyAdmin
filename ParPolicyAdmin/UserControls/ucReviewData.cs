@@ -63,11 +63,21 @@ namespace ParPolicyAdmin.UserControls
 
             frmReviewDuplicates frm = new frmReviewDuplicates(code);
             frm.ShowDialog();
+            frm.Close();
+            frm.Dispose();
+        }
 
-            //string code = dgvSources.SelectedRows[0].Cells["Code"].Value.ToString();
+        private void btnReviewDeficient_Click(object sender, EventArgs e)
+        {
+            if (dgvSources.SelectedRows.Count == 0)
+                return;
 
-            //Reports reports = new Reports();
-            //reports.GenerateDuplicateFeed(code);
+            string code = dgvSources.SelectedRows[0].Cells["Code"].Value.ToString();
+
+            frmReviewDeficient frm = new frmReviewDeficient(code);
+            frm.ShowDialog();
+            frm.Close();
+            frm.Dispose();
         }
     }
 }

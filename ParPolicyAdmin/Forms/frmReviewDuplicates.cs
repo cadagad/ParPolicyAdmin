@@ -19,7 +19,7 @@ namespace ParPolicyAdmin.Forms
         private PolicyRepo policyRepo;
         private string _source;
 
-        private List<VwDuplicatePolicy> policies;
+        private List<VwPolicySummary> policies;
 
         /* For change tracking */
         private List<int> idChanged = new List<int>();
@@ -41,11 +41,11 @@ namespace ParPolicyAdmin.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            List<VwDuplicatePolicy> changedPolicies = new List<VwDuplicatePolicy>();
+            List<VwPolicySummary> changedPolicies = new List<VwPolicySummary>();
 
             foreach (int i in idChanged)
             {
-                VwDuplicatePolicy dp = policies.Where(p => p.PolicyId == i).FirstOrDefault();
+                VwPolicySummary dp = policies.Where(p => p.PolicyId == i).FirstOrDefault();
                 changedPolicies.Add(dp);
             }
 
@@ -79,7 +79,7 @@ namespace ParPolicyAdmin.Forms
 
         private void GridRefresh(string searchText = null)
         {
-            List<VwDuplicatePolicy> filtered = new List<VwDuplicatePolicy>();
+            List<VwPolicySummary> filtered = new List<VwPolicySummary>();
 
             if (searchText != null)
                 filtered = policies.
@@ -91,7 +91,7 @@ namespace ParPolicyAdmin.Forms
 
             lblRecordCount.Text = "Record(s) : " + filtered.Count().ToString();
 
-            var bindingList = new BindingList<VwDuplicatePolicy>(filtered);
+            var bindingList = new BindingList<VwPolicySummary>(filtered);
             var src = new BindingSource(bindingList, null);
 
             dgvDuplicates.DataSource = src;
@@ -100,19 +100,29 @@ namespace ParPolicyAdmin.Forms
             {
                 dgvDuplicates.Columns["PolicyId"].Visible = false;
                 dgvDuplicates.Columns["PossibleDuplicate"].Visible = false;
+                dgvDuplicates.Columns["UserFlaggedDeficient"].Visible = false;
 
                 dgvDuplicates.Columns["PolicyNumber"].ReadOnly = true;
                 dgvDuplicates.Columns["HolderName"].ReadOnly = true;
                 dgvDuplicates.Columns["BirthDate"].ReadOnly = true;
                 dgvDuplicates.Columns["Address1"].ReadOnly = true;
                 dgvDuplicates.Columns["Address2"].ReadOnly = true;
+                dgvDuplicates.Columns["Address3"].ReadOnly = true;
+                dgvDuplicates.Columns["Address4"].ReadOnly = true;
+                dgvDuplicates.Columns["Address5"].ReadOnly = true;
                 dgvDuplicates.Columns["PossibleDuplicate"].ReadOnly = true;
+                dgvDuplicates.Columns["UserFlaggedDeficient"].ReadOnly = true;
 
-                dgvDuplicates.Columns["HolderName"].Width = 200;
-                dgvDuplicates.Columns["Address1"].Width = 250;
-                dgvDuplicates.Columns["Address2"].Width = 250;
+                dgvDuplicates.Columns["HolderName"].Width = 175;
+                dgvDuplicates.Columns["BirthDate"].Width = 85;
+                dgvDuplicates.Columns["Address1"].Width = 200;
+                dgvDuplicates.Columns["Address2"].Width = 200;
+                dgvDuplicates.Columns["Address3"].Width = 140;
+                dgvDuplicates.Columns["Address4"].Width = 140;
+                dgvDuplicates.Columns["Address5"].Width = 140;
+                dgvDuplicates.Columns["UserFlaggedDuplicate"].Width = 85;
 
-                dgvDuplicates.Columns["UserFlaggedDuplicate"].HeaderText = "Duplicate?";
+                dgvDuplicates.Columns["UserFlaggedDuplicate"].HeaderText = "Exclude?";
             }
 
             foreach (DataGridViewRow row in dgvDuplicates.Rows)

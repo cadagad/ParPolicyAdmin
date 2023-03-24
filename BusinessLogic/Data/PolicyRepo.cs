@@ -38,14 +38,55 @@ namespace BusinessLogic.Data
         {
             List<Policy> policyList = _appDbContext.Policy
                 .Where(p => sourceCode.Contains(p.SystemCode) && 
-                       p.PossibleDuplicate == false && 
+                       p.UserFlaggedDuplicate == false && 
                        p.ExactDuplicate == false &&
                        p.PolicyFeed.Project.IsActive == true)
                 .ToList();
             return policyList;
         }
 
-        public List<VwDuplicatePolicy> GetDuplicates_BySourceCode(string sourceCode)
+        public List<VwPolicySummary> GetDeficients_BySourceCode(string sourceCode)
+        {
+            if (sourceCode.Length <= 0 || sourceCode.Length > 3)
+                throw new Exception("Error : Source invalid format : " + sourceCode);
+
+            List<Policy> policyList = _appDbContext.Policy
+                .Where(p => p.SystemCode == sourceCode &&
+                       p.PolicyHolderId != null &&
+                       p.ExactDuplicate == false &&
+                       p.PolicyFeed.Project.IsActive == true)
+                .ToList();
+
+            List<VwPolicySummary> view = new List<VwPolicySummary>();
+            foreach (Policy p in policyList)
+            {
+                string bd = _COM.ConvertDate_yyyyMMdd(p.BirthDate);
+
+                VwPolicySummary v = new VwPolicySummary()
+                {
+                    PolicyId = p.PolicyId,
+                    HolderName = p.HolderName,
+                    BirthDate = bd,
+                    PolicyNumber = p.PolicyNumber,
+                    Address1 = p.Address1,
+                    Address2 = p.Address2,
+                    Address3 = p.Address3,
+                    Address4 = p.Address4,
+                    Address5 = p.Address5,
+                    PossibleDuplicate = p.PossibleDuplicate ?? false,
+                    UserFlaggedDuplicate = p.UserFlaggedDuplicate ?? false,
+                    UserFlaggedDeficient = p.UserFlaggedDeficient ?? false
+                };
+
+                view.Add(v);
+            }
+
+            var ret = view.OrderBy(p => p.HolderName).ThenBy(p => p.BirthDate).ThenBy(p => p.PossibleDuplicate).ToList();
+
+            return ret;
+        }
+
+        public List<VwPolicySummary> GetDuplicates_BySourceCode(string sourceCode)
         {
             if (sourceCode.Length <= 0 || sourceCode.Length > 3)
                 throw new Exception("Error : Source invalid format : " + sourceCode);
@@ -54,7 +95,8 @@ namespace BusinessLogic.Data
                 .Where(p => p.PossibleDuplicate == true && 
                        p.SystemCode == sourceCode && 
                        p.PolicyHolderId != null &&
-                       p.ExactDuplicate == false)
+                       p.ExactDuplicate == false &&
+                       p.PolicyFeed.Project.IsActive == true)
                 .Select(p => p.PolicyHolderId)
                 .ToList();
 
@@ -63,15 +105,16 @@ namespace BusinessLogic.Data
                 .Contains(p.PolicyHolderId) &&
                        p.SystemCode == sourceCode &&
                        p.PolicyHolderId != null &&
-                       p.ExactDuplicate == false)
+                       p.ExactDuplicate == false &&
+                       p.PolicyFeed.Project.IsActive == true)
                 .ToList();
 
-            List<VwDuplicatePolicy> view = new List<VwDuplicatePolicy>();
+            List<VwPolicySummary> view = new List<VwPolicySummary>();
             foreach (Policy p in policyList)
             {
                 string bd = _COM.ConvertDate_yyyyMMdd(p.BirthDate);
 
-                VwDuplicatePolicy v = new VwDuplicatePolicy()
+                VwPolicySummary v = new VwPolicySummary()
                 {
                     PolicyId = p.PolicyId,
                     HolderName = p.HolderName,
@@ -79,7 +122,11 @@ namespace BusinessLogic.Data
                     PolicyNumber = p.PolicyNumber,
                     Address1 = p.Address1,
                     Address2 = p.Address2,
-                    PossibleDuplicate = p.PossibleDuplicate ?? false
+                    Address3 = p.Address3,
+                    Address4 = p.Address4,
+                    Address5 = p.Address5,
+                    PossibleDuplicate = p.PossibleDuplicate ?? false,
+                    UserFlaggedDuplicate = p.UserFlaggedDuplicate ?? false
                 };
 
                 view.Add(v);
@@ -96,15 +143,32 @@ namespace BusinessLogic.Data
             _appDbContext.SaveChanges();
         }
 
-        public bool SaveReviewDuplicate(List<VwDuplicatePolicy> changes)
+        public bool SaveReviewDuplicate(List<VwPolicySummary> changes)
         {
             foreach (var c in changes)
             {
                 Policy result = _appDbContext.Policy.SingleOrDefault(p => p.PolicyId == c.PolicyId);
                 if (result != null && 
-                    result.PossibleDuplicate != c.PossibleDuplicate)
+                    result.UserFlaggedDuplicate != c.UserFlaggedDuplicate)
                 {
-                    result.PossibleDuplicate = c.PossibleDuplicate;
+                    result.UserFlaggedDuplicate = c.UserFlaggedDuplicate;
+                }
+            }
+
+            _appDbContext.SaveChanges();
+
+            return true;
+        }
+
+        public bool SaveReviewDeficient(List<VwPolicySummary> changes)
+        {
+            foreach (var c in changes)
+            {
+                Policy result = _appDbContext.Policy.SingleOrDefault(p => p.PolicyId == c.PolicyId);
+                if (result != null &&
+                    result.UserFlaggedDeficient != c.UserFlaggedDeficient)
+                {
+                    result.UserFlaggedDeficient = c.UserFlaggedDeficient;
                 }
             }
 

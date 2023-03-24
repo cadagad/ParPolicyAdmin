@@ -29,8 +29,8 @@ namespace ParPolicyAdmin.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDuplicates = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,28 +47,28 @@ namespace ParPolicyAdmin.Forms
             this.dgvDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDuplicates.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDuplicates.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDuplicates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDuplicates.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDuplicates.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDuplicates.Location = new System.Drawing.Point(13, 52);
             this.dgvDuplicates.Name = "dgvDuplicates";
             this.dgvDuplicates.RowHeadersWidth = 20;
             this.dgvDuplicates.RowTemplate.Height = 30;
-            this.dgvDuplicates.Size = new System.Drawing.Size(1059, 564);
+            this.dgvDuplicates.Size = new System.Drawing.Size(1309, 564);
             this.dgvDuplicates.TabIndex = 0;
             this.dgvDuplicates.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDuplicates_CellValueChanged);
             // 
@@ -80,9 +80,10 @@ namespace ParPolicyAdmin.Forms
             this.label1.ForeColor = System.Drawing.Color.Green;
             this.label1.Location = new System.Drawing.Point(12, 626);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(328, 13);
+            this.label1.Size = new System.Drawing.Size(556, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Please check the entries that are considered duplicates.";
+            this.label1.Text = "Please check the entries that are considered duplicates. It will get excluded fro" +
+    "m the mailing list.";
             // 
             // label2
             // 
@@ -92,16 +93,16 @@ namespace ParPolicyAdmin.Forms
             this.label2.ForeColor = System.Drawing.Color.Green;
             this.label2.Location = new System.Drawing.Point(10, 639);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(274, 13);
+            this.label2.Size = new System.Drawing.Size(295, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "- Upon opening - suspected dupcicates are pre-checked";
+            this.label2.Text = "- Upon opening - suspected dupcicates are in white cell color";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRecordCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecordCount.ForeColor = System.Drawing.Color.Green;
-            this.lblRecordCount.Location = new System.Drawing.Point(744, 29);
+            this.lblRecordCount.Location = new System.Drawing.Point(994, 29);
             this.lblRecordCount.Name = "lblRecordCount";
             this.lblRecordCount.Size = new System.Drawing.Size(328, 13);
             this.lblRecordCount.TabIndex = 3;
@@ -114,7 +115,7 @@ namespace ParPolicyAdmin.Forms
             this.btnSave.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(947, 622);
+            this.btnSave.Location = new System.Drawing.Point(1197, 622);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 30);
             this.btnSave.TabIndex = 4;
@@ -145,7 +146,7 @@ namespace ParPolicyAdmin.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.ClientSize = new System.Drawing.Size(1334, 661);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSave);
