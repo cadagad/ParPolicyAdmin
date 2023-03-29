@@ -161,6 +161,11 @@ namespace ParPolicyAdmin.Forms
             bool ret = policyRepo.SaveReviewDeficient(changedPolicies);
             if (ret)
             {
+                MessageBox.Show("Successfully saved " + idChanged.Count() + " records!",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 changedPolicies.Clear();
                 idChanged.Clear();
 

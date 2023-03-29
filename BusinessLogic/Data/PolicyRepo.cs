@@ -39,6 +39,8 @@ namespace BusinessLogic.Data
             List<Policy> policyList = _appDbContext.Policy
                 .Where(p => sourceCode.Contains(p.SystemCode) && 
                        p.UserFlaggedDuplicate == false && 
+                       p.UserFlaggedDeficient == false &&
+                       p.UserFlaggedExclusion == false &&
                        p.ExactDuplicate == false &&
                        p.PolicyFeed.Project.IsActive == true)
                 .ToList();
