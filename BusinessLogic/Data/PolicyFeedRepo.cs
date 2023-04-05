@@ -101,17 +101,31 @@ namespace BusinessLogic.Data
 
                 /* Valid file if it reaches here */
                 string fileName = Path.GetFileName(file);
-                PolicyFeed pf = new PolicyFeed()
-                {
-                    FileName = fileName,
-                    IsProcessed = false,
-                    ProjectId = projectId,
-                    RowCount = rowCount,
-                    IsValid = isValid,
-                    ExceptionReason = !String.IsNullOrEmpty(invalidFileMessage) ? invalidFileMessage : null
-                };
 
-                _appDbContext.PolicyFeeds.Add(pf);
+                PolicyFeed forUpdate = _appDbContext.PolicyFeeds
+                    .Where(upd => upd.FileName == fileName && upd.ProjectId == projectId).FirstOrDefault();
+                if (forUpdate != null)
+                {
+                    forUpdate.IsProcessed = false;
+                    forUpdate.RowCount = rowCount;
+                    forUpdate.IsValid = isValid;
+                    forUpdate.ExceptionReason = 
+                        !String.IsNullOrEmpty(invalidFileMessage) ? invalidFileMessage : null;
+                }
+                else
+                {
+                    PolicyFeed pf = new PolicyFeed()
+                    {
+                        FileName = fileName,
+                        IsProcessed = false,
+                        ProjectId = projectId,
+                        RowCount = rowCount,
+                        IsValid = isValid,
+                        ExceptionReason = !String.IsNullOrEmpty(invalidFileMessage) ? invalidFileMessage : null
+                    };
+
+                    _appDbContext.PolicyFeeds.Add(pf);
+                }
 
                 /* Copy the valid file to staging */
                 if (isValid)
