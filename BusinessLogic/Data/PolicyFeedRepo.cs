@@ -50,7 +50,7 @@ namespace BusinessLogic.Data
                 throw new Exception(String.Format("No files on {0}", dropoffPath));
 
             /* Get all text files */
-            string[] files = Directory.GetFiles(dropoffPath, "*.txt", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(dropoffPath, "*.txt");
             foreach (string file in files)
             {
                 bool isValid = true;
@@ -150,7 +150,10 @@ namespace BusinessLogic.Data
 
             foreach (string file in files)
             {
-                File.Move(file, (archiveWDate + "\\" + Path.GetFileName(file)));
+                /* If file exist - delete */
+                string archived_file = archiveWDate + "\\" + Path.GetFileName(file);
+                File.Copy(file, archived_file, true);
+                File.Delete(file);
             }
 
             /* If there are valid files - insert to db */
