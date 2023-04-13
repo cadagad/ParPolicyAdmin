@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="Data\BarcodeFeedRepo.cs" />
     <Compile Include="Data\PolicyFeedRepo.cs" />
     <Compile Include="Data\PolicyRepo.cs" />
     <Compile Include="Data\ProjectRepo.cs" />
@@ -86,7 +87,13 @@
     <Compile Include="Migrations\202303161848501_Policy-AddedUserFlagging.designer.cs">
       <DependentUpon>202303161848501_Policy-AddedUserFlagging.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304131801536_Barcode.cs" />
+    <Compile Include="Migrations\202304131801536_Barcode.designer.cs">
+      <DependentUpon>202304131801536_Barcode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Barcode.cs" />
+    <Compile Include="Models\BarcodeFeed.cs" />
     <Compile Include="Models\Policy.cs" />
     <Compile Include="Models\PolicyFeed.cs" />
     <Compile Include="Models\Project.cs" />
@@ -137,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202303161848501_Policy-AddedUserFlagging.resx">
       <DependentUpon>202303161848501_Policy-AddedUserFlagging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304131801536_Barcode.resx">
+      <DependentUpon>202304131801536_Barcode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

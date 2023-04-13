@@ -14,6 +14,7 @@ namespace BusinessLogic.Models
 
         [ForeignKey("BarcodeFeed")]
         public int BarcodeFeedId { get; set; }
+        public virtual BarcodeFeed BarcodeFeed { get; set; }
 
         public int LineNumber { get; set; }
 

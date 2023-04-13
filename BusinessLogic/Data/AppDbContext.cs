@@ -23,6 +23,8 @@ namespace BusinessLogic.Data
         public DbSet<PolicyFeed> PolicyFeeds { get; set; }
         public DbSet<Source> Sources { get; set; }
         public DbSet<Policy> Policy { get; set; }
+        public DbSet<Barcode> Barcodes { get; set; }
+        public DbSet<BarcodeFeed> BarcodeFeeds { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

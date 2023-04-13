@@ -32,7 +32,7 @@ namespace BusinessLogic.Models
         [Required]
         public DateTime ProcessedDate { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(200)]
         public string ExceptionReason { get; set; }
 
         [ForeignKey("Project")]
