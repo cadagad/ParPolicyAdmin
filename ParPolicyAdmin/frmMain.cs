@@ -112,5 +112,21 @@ namespace ParPolicyAdmin
 
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnLoadBarcodes_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            UpdateLabels();
+
+            if (currentUserControl != null)
+                this.panelBody.Controls.Clear();
+
+            currentUserControl = new ucBarcodes();
+
+            currentUserControl.Dock = DockStyle.Fill;
+            this.panelBody.Controls.Add(currentUserControl);
+
+            Cursor.Current = Cursors.Default;
+        }
     }
 }

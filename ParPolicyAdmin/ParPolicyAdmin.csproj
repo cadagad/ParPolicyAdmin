@@ -109,6 +109,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ucBarcodes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucBarcodes.Designer.cs">
+      <DependentUpon>ucBarcodes.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucLoadFiles.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -146,6 +152,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucBarcodes.resx">
+      <DependentUpon>ucBarcodes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucLoadFiles.resx">
       <DependentUpon>ucLoadFiles.cs</DependentUpon>

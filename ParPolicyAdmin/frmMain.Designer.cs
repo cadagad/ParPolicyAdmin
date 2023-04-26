@@ -102,6 +102,7 @@ namespace ParPolicyAdmin
             this.btnLoadBarcodes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLoadBarcodes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadBarcodes.UseVisualStyleBackColor = true;
+            this.btnLoadBarcodes.Click += new System.EventHandler(this.btnLoadBarcodes_Click);
             // 
             // btnSubmit
             // 
