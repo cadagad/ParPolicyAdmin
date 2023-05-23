@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Data\BarcodeFeedRepo.cs" />
+    <Compile Include="Data\BarcodeRepo.cs" />
     <Compile Include="Data\PolicyFeedRepo.cs" />
     <Compile Include="Data\PolicyRepo.cs" />
     <Compile Include="Data\ProjectRepo.cs" />

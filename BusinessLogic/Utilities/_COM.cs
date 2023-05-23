@@ -10,6 +10,17 @@ namespace BusinessLogic.Utilities
 {
     public static class _COM
     {
+        /* Barcode constants */
+        public const int BCODE_LEN_MINLINE = 470;
+
+        public const int BCODE_START_POS_POLICYNUM = 18;
+        public const int BCODE_LEN_POLICYNUM = 10;
+
+        public const int BCODE_START_POS_BARCODENUM = 461;
+        public const int BCODE_LEN_BARCODENUM = 7;
+
+        /* Barcode constants - END */
+
         public const int LEN_MINLINE = 359;
         public const int LEN_SYSCODE = 3;
         public const int LEN_POLICYNUM = 10;

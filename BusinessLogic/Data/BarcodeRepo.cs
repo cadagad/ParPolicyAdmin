@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Models;
+using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,7 +41,7 @@ namespace BusinessLogic.Data
             return true;
         }
 
-        public List<Barcode> BarcodeFeed_ToList(int barcodeFeedId, string stagingPath)
+        public List<Barcode> Process_AllRecords_ToList(int barcodeFeedId, string stagingPath)
         {
             BarcodeFeed barcodeFeed = _appDbContext.BarcodeFeeds
                 .Where(bf => bf.BarcodeFeedId == barcodeFeedId && bf.IsValid)
@@ -62,9 +63,9 @@ namespace BusinessLogic.Data
             if (!File.Exists(file))
                 throw new Exception(String.Format("Error : File does not exist", file));
 
-            /* Check if text file */
-            if (Path.GetExtension(file).ToLower() != ".txt")
-                throw new Exception(String.Format("Error : Invalid File Extension", file));
+            /* Check if correct file */
+            if (barcodeFeed.FileName != "ALL_RECORDS.TXT")
+                throw new Exception(String.Format("Error : Invalid File : ", file));
             #endregion
 
             /* Check if has Policy has existing records - Delete if exist */
@@ -79,6 +80,44 @@ namespace BusinessLogic.Data
             string[] lines = File.ReadAllLines(file);
             int ln = 0;
 
+            using (var context = new AppDbContext())
+            {
+                foreach (string line in lines)
+                {
+                    ln++;
+                    Barcode barcode = new Barcode();
+
+                    /* Check if line length is valid */
+                    if (line.Length < _COM.BCODE_LEN_MINLINE)
+                        continue;
+
+                    /* Check if Policy Number is valid */
+                    string policyNum = line.Substring(_COM.BCODE_START_POS_POLICYNUM, _COM.BCODE_LEN_POLICYNUM).Trim();
+                    if (String.IsNullOrEmpty(policyNum))
+                        continue;
+
+                    /* Check if Barcode Number is valid */
+                    string barcodeNum = line.Substring(_COM.BCODE_START_POS_BARCODENUM, _COM.BCODE_LEN_BARCODENUM).Trim();
+                    if (String.IsNullOrEmpty(barcodeNum))
+                        continue;
+
+                    /* Pad zero to policyNum */
+                    policyNum = policyNum.PadLeft(_COM.BCODE_LEN_POLICYNUM, '0');
+
+                    /* Pad zero to policyNum */
+                    barcodeNum = barcodeNum.PadLeft(_COM.BCODE_LEN_BARCODENUM, '0');
+
+                    barcode.BarcodeFeedId = barcodeFeedId;
+                    barcode.LineNumber = ln;
+                    barcode.BarcodeNumber = barcodeNum;
+                    barcode.PolicyNumber = policyNum;
+
+                    barcodes.Add(barcode);
+                }
+            }
+
+
             return barcodes;
         }
     }
+}
