@@ -20,5 +20,17 @@ namespace BusinessLogic.Utilities
 
             return list;
         }
+
+        public static List<List<Barcode>> SplitList(List<Barcode> barcodes, int nSize = 30)
+        {
+            var list = new List<List<Barcode>>();
+
+            for (int i = 0; i < barcodes.Count; i += nSize)
+            {
+                list.Add(barcodes.GetRange(i, Math.Min(nSize, barcodes.Count - i)));
+            }
+
+            return list;
+        }
     }
 }

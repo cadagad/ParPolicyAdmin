@@ -25,12 +25,10 @@ namespace BusinessLogic.Models
         [Required]
         public int RowCount { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string ProcessedBy { get; set; }
 
-        [Required]
-        public DateTime ProcessedDate { get; set; }
+        public DateTime? ProcessedDate { get; set; }
 
         [MaxLength(200)]
         public string ExceptionReason { get; set; }

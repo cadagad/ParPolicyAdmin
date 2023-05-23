@@ -133,5 +133,13 @@ namespace BusinessLogic.Data
 
             return true;
         }
+
+        public void SetFeedIsProcessed(int barcodeFeedId)
+        {
+            BarcodeFeed bf = _appDbContext.BarcodeFeeds.Where(p => p.BarcodeFeedId == barcodeFeedId).FirstOrDefault();
+            bf.IsProcessed = true;
+
+            _appDbContext.SaveChanges();
+        }
     }
 }

@@ -217,6 +217,7 @@ namespace ParPolicyAdmin.UserControls
             this.btnProcess.TabIndex = 13;
             this.btnProcess.Text = "Process";
             this.btnProcess.UseVisualStyleBackColor = false;
+            this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
             // 
             // btnRefresh
             // 
@@ -229,6 +230,7 @@ namespace ParPolicyAdmin.UserControls
             this.btnRefresh.TabIndex = 12;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // ucBarcodes
             // 
@@ -240,6 +242,7 @@ namespace ParPolicyAdmin.UserControls
             this.Controls.Add(this.dgvBarcodes);
             this.Name = "ucBarcodes";
             this.Size = new System.Drawing.Size(900, 475);
+            this.Load += new System.EventHandler(this.ucBarcodes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).EndInit();
             this.pnlDescription.ResumeLayout(false);
             this.pnlDescription.PerformLayout();

@@ -41,6 +41,12 @@ namespace BusinessLogic.Data
             return true;
         }
 
+        public void BulkInsertPolicy(List<Barcode> barcodes)
+        {
+            _appDbContext.Barcodes.AddRange(barcodes);
+            _appDbContext.SaveChanges();
+        }
+
         public List<Barcode> Process_AllRecords_ToList(int barcodeFeedId, string stagingPath)
         {
             BarcodeFeed barcodeFeed = _appDbContext.BarcodeFeeds

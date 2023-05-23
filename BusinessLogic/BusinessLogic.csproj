@@ -92,6 +92,14 @@
     <Compile Include="Migrations\202304131801536_Barcode.designer.cs">
       <DependentUpon>202304131801536_Barcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305231335212_Fix issue with BarcodeFeed model.cs" />
+    <Compile Include="Migrations\202305231335212_Fix issue with BarcodeFeed model.designer.cs">
+      <DependentUpon>202305231335212_Fix issue with BarcodeFeed model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305231400082_Fix issue with BarcodeFeed model 2nd.cs" />
+    <Compile Include="Migrations\202305231400082_Fix issue with BarcodeFeed model 2nd.designer.cs">
+      <DependentUpon>202305231400082_Fix issue with BarcodeFeed model 2nd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Barcode.cs" />
     <Compile Include="Models\BarcodeFeed.cs" />
@@ -148,6 +156,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304131801536_Barcode.resx">
       <DependentUpon>202304131801536_Barcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305231335212_Fix issue with BarcodeFeed model.resx">
+      <DependentUpon>202305231335212_Fix issue with BarcodeFeed model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305231400082_Fix issue with BarcodeFeed model 2nd.resx">
+      <DependentUpon>202305231400082_Fix issue with BarcodeFeed model 2nd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
