@@ -115,6 +115,12 @@
     <Compile Include="UserControls\ucBarcodes.Designer.cs">
       <DependentUpon>ucBarcodes.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucLateReturns.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucLateReturns.Designer.cs">
+      <DependentUpon>ucLateReturns.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucLoadFiles.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucBarcodes.resx">
       <DependentUpon>ucBarcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucLateReturns.resx">
+      <DependentUpon>ucLateReturns.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucLoadFiles.resx">
       <DependentUpon>ucLoadFiles.cs</DependentUpon>

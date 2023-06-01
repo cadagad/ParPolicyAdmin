@@ -43,6 +43,7 @@ namespace ParPolicyAdmin
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lblLoggedAs = new System.Windows.Forms.Label();
             this.lblFeature = new System.Windows.Forms.Label();
+            this.btnLateReturns = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -52,6 +53,7 @@ namespace ParPolicyAdmin
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.Gray;
+            this.panelMain.Controls.Add(this.btnLateReturns);
             this.panelMain.Controls.Add(this.btnReports);
             this.panelMain.Controls.Add(this.btnLoadBarcodes);
             this.panelMain.Controls.Add(this.btnSubmit);
@@ -83,6 +85,7 @@ namespace ParPolicyAdmin
             this.btnReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // btnLoadBarcodes
             // 
@@ -250,6 +253,26 @@ namespace ParPolicyAdmin
             this.lblFeature.TabIndex = 0;
             this.lblFeature.Text = "Feature";
             // 
+            // btnLateReturns
+            // 
+            this.btnLateReturns.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLateReturns.FlatAppearance.BorderSize = 0;
+            this.btnLateReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLateReturns.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLateReturns.ForeColor = System.Drawing.Color.Snow;
+            this.btnLateReturns.Image = global::ParPolicyAdmin.Properties.Resources.barcode;
+            this.btnLateReturns.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLateReturns.Location = new System.Drawing.Point(0, 425);
+            this.btnLateReturns.Name = "btnLateReturns";
+            this.btnLateReturns.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnLateReturns.Size = new System.Drawing.Size(220, 60);
+            this.btnLateReturns.TabIndex = 7;
+            this.btnLateReturns.Text = "Late Returns";
+            this.btnLateReturns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLateReturns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLateReturns.UseVisualStyleBackColor = true;
+            this.btnLateReturns.Click += new System.EventHandler(this.btnLateReturns_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,6 +308,7 @@ namespace ParPolicyAdmin
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Label lblFeature;
         private System.Windows.Forms.Label lblLoggedAs;
+        private System.Windows.Forms.Button btnLateReturns;
     }
 }
 

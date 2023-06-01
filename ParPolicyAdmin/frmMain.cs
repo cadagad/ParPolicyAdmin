@@ -128,5 +128,26 @@ namespace ParPolicyAdmin
 
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLateReturns_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            UpdateLabels();
+
+            if (currentUserControl != null)
+                this.panelBody.Controls.Clear();
+
+            currentUserControl = new ucLateReturns(CurrentProject.ProjectId);
+
+            currentUserControl.Dock = DockStyle.Fill;
+            this.panelBody.Controls.Add(currentUserControl);
+
+            Cursor.Current = Cursors.Default;
+        }
     }
 }
