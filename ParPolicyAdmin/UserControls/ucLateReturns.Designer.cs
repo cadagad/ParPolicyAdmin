@@ -29,9 +29,13 @@ namespace ParPolicyAdmin.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.dgvBarcodes = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).BeginInit();
             this.SuspendLayout();
             // 
             // tbSearch
@@ -60,16 +64,49 @@ namespace ParPolicyAdmin.UserControls
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // dgvBarcodes
+            // 
+            this.dgvBarcodes.AllowUserToAddRows = false;
+            this.dgvBarcodes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBarcodes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvBarcodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBarcodes.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvBarcodes.Location = new System.Drawing.Point(16, 36);
+            this.dgvBarcodes.Name = "dgvBarcodes";
+            this.dgvBarcodes.RowHeadersWidth = 20;
+            this.dgvBarcodes.RowTemplate.Height = 30;
+            this.dgvBarcodes.Size = new System.Drawing.Size(853, 388);
+            this.dgvBarcodes.TabIndex = 10;
             // 
             // ucLateReturns
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dgvBarcodes);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.lblSearch);
             this.Name = "ucLateReturns";
             this.Size = new System.Drawing.Size(900, 475);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,5 +117,6 @@ namespace ParPolicyAdmin.UserControls
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.DataGridView dgvBarcodes;
     }
 }

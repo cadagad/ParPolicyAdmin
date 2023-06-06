@@ -125,5 +125,47 @@ namespace BusinessLogic.Data
 
             return barcodes;
         }
+
+        public List<VwBarcodePolicy> GetAllBarcodePolicy_ByProjectId(int projectId, string filter = null)
+        {
+            List<VwBarcodePolicy> barcodePolicies = new List<VwBarcodePolicy>();
+
+            List<Barcode> barcodes = new List<Barcode>();
+
+            if (String.IsNullOrEmpty(filter))
+            {
+                barcodes = _appDbContext.Barcodes
+                    .Where(b => b.BarcodeFeed.Project.IsActive == true)
+                    .ToList();
+            }
+            else
+            {
+                barcodes = _appDbContext.Barcodes
+                    .Where(b => b.BarcodeFeed.Project.IsActive == true && b.BarcodeNumber.Contains(filter ?? String.Empty))
+                    .ToList();
+            }
+
+            List<Policy> policies = _appDbContext.Policy
+                .Where(p => p.PolicyFeed.Project.IsActive == true)
+                .ToList();
+
+            barcodePolicies = barcodes.Join(
+                policies, 
+                b => b.PolicyNumber, 
+                p => p.PolicyNumber, 
+                (b, p) => new VwBarcodePolicy 
+                {
+                    BarcodeId = b.BarcodeId,
+                    BarcodeNumber = b.BarcodeNumber,
+                    PolicyNumber = b.PolicyNumber,
+                    HolderName = p.HolderName,
+                    BirthDate = p.BirthDate,
+                    Address1 = p.Address1,
+                    Address2 = p.Address2,
+                    Address3 = p.Address3
+                }).ToList();
+
+            return barcodePolicies;
+        }
     }
 }
