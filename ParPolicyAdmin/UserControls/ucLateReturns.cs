@@ -49,7 +49,8 @@ namespace ParPolicyAdmin.UserControls
             {
                 filtered = barcodeRepo.GetAllBarcodePolicy_ByProjectId(_activeProjectId);
             }
-            
+
+            lblRecordCount.Text = "Record(s) : " + filtered.Count().ToString();
 
             var bindingList = new BindingList<VwBarcodePolicy>(filtered);
             var src = new BindingSource(bindingList, null);

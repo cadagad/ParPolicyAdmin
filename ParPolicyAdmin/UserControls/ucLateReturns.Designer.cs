@@ -35,6 +35,7 @@ namespace ParPolicyAdmin.UserControls
             this.lblSearch = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvBarcodes = new System.Windows.Forms.DataGridView();
+            this.lblRecordCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,13 +94,27 @@ namespace ParPolicyAdmin.UserControls
             this.dgvBarcodes.Name = "dgvBarcodes";
             this.dgvBarcodes.RowHeadersWidth = 20;
             this.dgvBarcodes.RowTemplate.Height = 30;
+            this.dgvBarcodes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBarcodes.Size = new System.Drawing.Size(853, 388);
             this.dgvBarcodes.TabIndex = 10;
+            // 
+            // lblRecordCount
+            // 
+            this.lblRecordCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRecordCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecordCount.ForeColor = System.Drawing.Color.Green;
+            this.lblRecordCount.Location = new System.Drawing.Point(541, 17);
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(328, 13);
+            this.lblRecordCount.TabIndex = 11;
+            this.lblRecordCount.Text = "Record(s) : ";
+            this.lblRecordCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ucLateReturns
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblRecordCount);
             this.Controls.Add(this.dgvBarcodes);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.tbSearch);
@@ -118,5 +133,6 @@ namespace ParPolicyAdmin.UserControls
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.DataGridView dgvBarcodes;
+        private System.Windows.Forms.Label lblRecordCount;
     }
 }
