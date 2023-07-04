@@ -83,6 +83,16 @@ namespace ParPolicyAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap expired_32 {
+            get {
+                object obj = ResourceManager.GetObject("expired_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Logo_MIM_Transparent {
             get {
                 object obj = ResourceManager.GetObject("Logo_MIM_Transparent", resourceCulture);

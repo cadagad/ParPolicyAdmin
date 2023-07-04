@@ -31,23 +31,23 @@ namespace ParPolicyAdmin
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panelMain = new System.Windows.Forms.Panel();
+            this.panelLogo = new System.Windows.Forms.Panel();
+            this.panelBody = new System.Windows.Forms.Panel();
+            this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.lblLoggedAs = new System.Windows.Forms.Label();
+            this.lblFeature = new System.Windows.Forms.Label();
+            this.btnLateReturns = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.btnLoadBarcodes = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnReviewData = new System.Windows.Forms.Button();
             this.btnLoadFiles = new System.Windows.Forms.Button();
             this.btnProject = new System.Windows.Forms.Button();
-            this.panelLogo = new System.Windows.Forms.Panel();
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.panelBody = new System.Windows.Forms.Panel();
-            this.panelTitleBar = new System.Windows.Forms.Panel();
-            this.lblLoggedAs = new System.Windows.Forms.Label();
-            this.lblFeature = new System.Windows.Forms.Label();
-            this.btnLateReturns = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panelTitleBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMain
@@ -66,6 +66,82 @@ namespace ParPolicyAdmin
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(220, 661);
             this.panelMain.TabIndex = 0;
+            // 
+            // panelLogo
+            // 
+            this.panelLogo.BackColor = System.Drawing.Color.DimGray;
+            this.panelLogo.Controls.Add(this.picLogo);
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(220, 65);
+            this.panelLogo.TabIndex = 0;
+            // 
+            // panelBody
+            // 
+            this.panelBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelBody.Location = new System.Drawing.Point(220, 65);
+            this.panelBody.Name = "panelBody";
+            this.panelBody.Size = new System.Drawing.Size(964, 596);
+            this.panelBody.TabIndex = 2;
+            // 
+            // panelTitleBar
+            // 
+            this.panelTitleBar.BackColor = System.Drawing.Color.Gray;
+            this.panelTitleBar.Controls.Add(this.lblLoggedAs);
+            this.panelTitleBar.Controls.Add(this.lblFeature);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(964, 65);
+            this.panelTitleBar.TabIndex = 4;
+            // 
+            // lblLoggedAs
+            // 
+            this.lblLoggedAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLoggedAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoggedAs.ForeColor = System.Drawing.Color.Khaki;
+            this.lblLoggedAs.Location = new System.Drawing.Point(702, 19);
+            this.lblLoggedAs.Name = "lblLoggedAs";
+            this.lblLoggedAs.Size = new System.Drawing.Size(250, 29);
+            this.lblLoggedAs.TabIndex = 2;
+            this.lblLoggedAs.Text = "User : ";
+            this.lblLoggedAs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblFeature
+            // 
+            this.lblFeature.AutoSize = true;
+            this.lblFeature.BackColor = System.Drawing.Color.Transparent;
+            this.lblFeature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFeature.ForeColor = System.Drawing.Color.Khaki;
+            this.lblFeature.Location = new System.Drawing.Point(16, 23);
+            this.lblFeature.Name = "lblFeature";
+            this.lblFeature.Size = new System.Drawing.Size(72, 20);
+            this.lblFeature.TabIndex = 0;
+            this.lblFeature.Text = "Feature";
+            // 
+            // btnLateReturns
+            // 
+            this.btnLateReturns.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLateReturns.FlatAppearance.BorderSize = 0;
+            this.btnLateReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLateReturns.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLateReturns.ForeColor = System.Drawing.Color.Snow;
+            this.btnLateReturns.Image = global::ParPolicyAdmin.Properties.Resources.expired_32;
+            this.btnLateReturns.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLateReturns.Location = new System.Drawing.Point(0, 425);
+            this.btnLateReturns.Name = "btnLateReturns";
+            this.btnLateReturns.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnLateReturns.Size = new System.Drawing.Size(220, 60);
+            this.btnLateReturns.TabIndex = 7;
+            this.btnLateReturns.Text = "  Late Returns";
+            this.btnLateReturns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLateReturns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLateReturns.UseVisualStyleBackColor = true;
+            this.btnLateReturns.Click += new System.EventHandler(this.btnLateReturns_Click);
             // 
             // btnReports
             // 
@@ -188,16 +264,6 @@ namespace ParPolicyAdmin
             this.btnProject.UseVisualStyleBackColor = true;
             this.btnProject.Click += new System.EventHandler(this.btnProject_Click);
             // 
-            // panelLogo
-            // 
-            this.panelLogo.BackColor = System.Drawing.Color.DimGray;
-            this.panelLogo.Controls.Add(this.picLogo);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 65);
-            this.panelLogo.TabIndex = 0;
-            // 
             // picLogo
             // 
             this.picLogo.Image = global::ParPolicyAdmin.Properties.Resources.Logo_MIM_Transparent;
@@ -206,72 +272,6 @@ namespace ParPolicyAdmin
             this.picLogo.Size = new System.Drawing.Size(211, 50);
             this.picLogo.TabIndex = 0;
             this.picLogo.TabStop = false;
-            // 
-            // panelBody
-            // 
-            this.panelBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelBody.Location = new System.Drawing.Point(220, 65);
-            this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(964, 596);
-            this.panelBody.TabIndex = 2;
-            // 
-            // panelTitleBar
-            // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.Gray;
-            this.panelTitleBar.Controls.Add(this.lblLoggedAs);
-            this.panelTitleBar.Controls.Add(this.lblFeature);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(964, 65);
-            this.panelTitleBar.TabIndex = 4;
-            // 
-            // lblLoggedAs
-            // 
-            this.lblLoggedAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLoggedAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
-                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoggedAs.ForeColor = System.Drawing.Color.Khaki;
-            this.lblLoggedAs.Location = new System.Drawing.Point(702, 19);
-            this.lblLoggedAs.Name = "lblLoggedAs";
-            this.lblLoggedAs.Size = new System.Drawing.Size(250, 29);
-            this.lblLoggedAs.TabIndex = 2;
-            this.lblLoggedAs.Text = "User : ";
-            this.lblLoggedAs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblFeature
-            // 
-            this.lblFeature.AutoSize = true;
-            this.lblFeature.BackColor = System.Drawing.Color.Transparent;
-            this.lblFeature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFeature.ForeColor = System.Drawing.Color.Khaki;
-            this.lblFeature.Location = new System.Drawing.Point(16, 23);
-            this.lblFeature.Name = "lblFeature";
-            this.lblFeature.Size = new System.Drawing.Size(72, 20);
-            this.lblFeature.TabIndex = 0;
-            this.lblFeature.Text = "Feature";
-            // 
-            // btnLateReturns
-            // 
-            this.btnLateReturns.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnLateReturns.FlatAppearance.BorderSize = 0;
-            this.btnLateReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLateReturns.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLateReturns.ForeColor = System.Drawing.Color.Snow;
-            this.btnLateReturns.Image = global::ParPolicyAdmin.Properties.Resources.barcode;
-            this.btnLateReturns.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLateReturns.Location = new System.Drawing.Point(0, 425);
-            this.btnLateReturns.Name = "btnLateReturns";
-            this.btnLateReturns.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnLateReturns.Size = new System.Drawing.Size(220, 60);
-            this.btnLateReturns.TabIndex = 7;
-            this.btnLateReturns.Text = "Late Returns";
-            this.btnLateReturns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLateReturns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLateReturns.UseVisualStyleBackColor = true;
-            this.btnLateReturns.Click += new System.EventHandler(this.btnLateReturns_Click);
             // 
             // frmMain
             // 
@@ -286,9 +286,9 @@ namespace ParPolicyAdmin
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panelMain.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
