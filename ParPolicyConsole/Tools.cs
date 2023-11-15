@@ -23,7 +23,14 @@ namespace ParPolicyConsole
             PolicyRepo policyRepo = new PolicyRepo();
 
             string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
-            string[] feedIds = File.ReadAllLines(staging_folder + "\\" + "feedIds.txt");
+            string path = staging_folder + "\\" + "Feeds.txt";
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Error : Feeds.txt is expected on " + staging_folder);
+                return false;
+            }
+
+            string[] feedIds = File.ReadAllLines(path);
 
             try
             {
