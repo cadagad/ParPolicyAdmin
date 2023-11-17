@@ -87,45 +87,13 @@ namespace ParPolicyAdmin.UserControls
             {
                 DateTime startTime = DateTime.Now;
 
-                lblMessage.Visible = true;
-                lblMessage.Text = "Begin Processing...";
-
                 foreach (DataGridViewRow r in dgvFeeds.SelectedRows)
                 {
                     int feedId = (int)r.Cells["PolicyFeedId"].Value;
-                    
-                    List<Policy> policies = policyRepo.PolicyFeed_ToList(feedId, Staging);
-                    //policyRepo.ReviewDuplicates(ref policies, feedId);
-                    
-                    int PAGE_SIZE = 5000;
-                    List<List<Policy>> chunks = ListExtensions.SplitList(policies, PAGE_SIZE);
+                    policyFeedRepo.SetFeedIsRunning(feedId);
 
-                    // int iteration = 0;
-                    foreach (List<Policy> p in chunks)
-                    {
-                        //lblMessage.Text = String.Format("Processing {0} : Records {1} of {2}",
-                        //    r.Cells["FileName"].Value.ToString(),
-                        //    (iteration * PAGE_SIZE),
-                        //    policies.Count());
-
-                        //lblMessage.Refresh();
-                        //iteration++;
-
-                        policyRepo.BulkInsertPolicy(p);
-                    }
-
-                    policyFeedRepo.SetFeedIsProcessed(feedId);
+                    /* Write feedId to file Feeds.txt */
                 }
-
-                DateTime endTime = DateTime.Now;
-                lblMessage.Text = String.Format("Processing Successful... {0}m : {1}s", 
-                    (endTime - startTime).Minutes.ToString(),  
-                    (endTime - startTime).Seconds.ToString());
-
-                MessageBox.Show("Processing is complete!",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -157,14 +125,15 @@ namespace ParPolicyAdmin.UserControls
                 dgvFeeds.Columns["ExceptionReason"].Visible = false;
                 dgvFeeds.Columns["ProjectId"].Visible = false;
                 dgvFeeds.Columns["Project"].Visible = false;
+                dgvFeeds.Columns["IsProcessed"].Visible = false;
 
                 /* Column width */
-                dgvFeeds.Columns["FileName"].Width = 300;
+                dgvFeeds.Columns["FileName"].Width = 280;
 
                 /* Display order */
                 dgvFeeds.Columns["FileName"].DisplayIndex = 0;
                 dgvFeeds.Columns["RowCount"].DisplayIndex = 1;
-                dgvFeeds.Columns["IsProcessed"].DisplayIndex = 2;
+                dgvFeeds.Columns["Status"].DisplayIndex = 2;
             }
         }
 

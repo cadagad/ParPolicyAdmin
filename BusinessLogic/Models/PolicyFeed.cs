@@ -24,6 +24,9 @@ namespace BusinessLogic.Models
         [Required]
         public bool IsValid { get; set; }
 
+        [MaxLength(20)]
+        public string Status { get; set; }
+
         public int? RowCount { get; set; }
 
         [MaxLength(20)]

@@ -100,6 +100,10 @@
     <Compile Include="Migrations\202305231400082_Fix issue with BarcodeFeed model 2nd.designer.cs">
       <DependentUpon>202305231400082_Fix issue with BarcodeFeed model 2nd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311161351224_Added status field.cs" />
+    <Compile Include="Migrations\202311161351224_Added status field.designer.cs">
+      <DependentUpon>202311161351224_Added status field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Barcode.cs" />
     <Compile Include="Models\BarcodeFeed.cs" />
@@ -163,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305231400082_Fix issue with BarcodeFeed model 2nd.resx">
       <DependentUpon>202305231400082_Fix issue with BarcodeFeed model 2nd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311161351224_Added status field.resx">
+      <DependentUpon>202311161351224_Added status field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

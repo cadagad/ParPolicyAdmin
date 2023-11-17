@@ -107,6 +107,7 @@ namespace BusinessLogic.Data
                 if (forUpdate != null)
                 {
                     forUpdate.IsProcessed = false;
+                    forUpdate.Status = "Pending";
                     forUpdate.RowCount = rowCount;
                     forUpdate.IsValid = isValid;
                     forUpdate.ExceptionReason = 
@@ -121,6 +122,7 @@ namespace BusinessLogic.Data
                         ProjectId = projectId,
                         RowCount = rowCount,
                         IsValid = isValid,
+                        Status = "Pending",
                         ExceptionReason = !String.IsNullOrEmpty(invalidFileMessage) ? invalidFileMessage : null
                     };
 
@@ -166,6 +168,15 @@ namespace BusinessLogic.Data
         {
             PolicyFeed pf = _appDbContext.PolicyFeeds.Where(p => p.PolicyFeedId == policyFeedId).FirstOrDefault();
             pf.IsProcessed = true;
+            pf.Status = "Complete";
+
+            _appDbContext.SaveChanges();
+        }
+
+        public void SetFeedIsRunning(int policyFeedId)
+        {
+            PolicyFeed pf = _appDbContext.PolicyFeeds.Where(p => p.PolicyFeedId == policyFeedId).FirstOrDefault();
+            pf.Status = "Running";
 
             _appDbContext.SaveChanges();
         }
