@@ -29,6 +29,7 @@ namespace ParPolicyAdmin.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucLoadFiles));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -49,6 +50,7 @@ namespace ParPolicyAdmin.UserControls
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
+            this.tmrRefresh = new System.Windows.Forms.Timer(this.components);
             this.pnlDescription.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeeds)).BeginInit();
             this.SuspendLayout();
@@ -287,6 +289,11 @@ namespace ParPolicyAdmin.UserControls
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // tmrRefresh
+            // 
+            this.tmrRefresh.Interval = 30000;
+            this.tmrRefresh.Tick += new System.EventHandler(this.tmrRefresh_Tick);
+            // 
             // ucLoadFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,5 +333,6 @@ namespace ParPolicyAdmin.UserControls
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Timer tmrRefresh;
     }
 }

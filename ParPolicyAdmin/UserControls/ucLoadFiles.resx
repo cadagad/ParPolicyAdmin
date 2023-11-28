@@ -120,4 +120,7 @@
   <data name="tbLabel2.Text" xml:space="preserve">
     <value>The Start button launches processes behind the scenes that look for new files uploaded by sources to the MLI servers.  The files are cleaned up, loaded into the database, and analyzed for duplicates.  The process can take a considerable amount of time.</value>
   </data>
+  <metadata name="tmrRefresh.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

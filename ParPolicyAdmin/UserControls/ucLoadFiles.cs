@@ -87,12 +87,18 @@ namespace ParPolicyAdmin.UserControls
             {
                 DateTime startTime = DateTime.Now;
 
+                string fn = Staging + "\\Feeds.txt";
+
+                /* Delete if exist */
+                if (File.Exists(fn))
+                    File.Delete(fn);
+
                 foreach (DataGridViewRow r in dgvFeeds.SelectedRows)
                 {
                     int feedId = (int)r.Cells["PolicyFeedId"].Value;
                     policyFeedRepo.SetFeedIsRunning(feedId);
 
-                    /* Write feedId to file Feeds.txt */
+                    File.AppendAllText(fn, (feedId.ToString() + "\n"));
                 }
             }
             catch (Exception ex)
@@ -140,6 +146,11 @@ namespace ParPolicyAdmin.UserControls
         private void btnReset_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void tmrRefresh_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ParPolicyConsole
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0)
+            if (args.Length == 2)
             {
                 Console.WriteLine("Usage\n" +
                                   "-----\n");
@@ -25,8 +25,14 @@ namespace ParPolicyConsole
 
             }
 
-            if (args[0].ToLower() == "upload-policy")
+            if (args.Length > 0 && args[0].ToLower() == "upload-policy")
             {
+                Tools tools = new Tools();
+                tools.UploadPolicy();
+            }
+            else
+            {
+                /* Temporary for testing */
                 Tools tools = new Tools();
                 tools.UploadPolicy();
             }
