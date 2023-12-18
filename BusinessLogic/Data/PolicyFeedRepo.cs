@@ -22,6 +22,7 @@ namespace BusinessLogic.Data
         public List<PolicyFeed> GetPolicyFeeds_ByProjectId(int projectId)
         {
             List<PolicyFeed> PolicyFeedList = _appDbContext.PolicyFeeds
+                .AsNoTracking()
                 .Where(pf => pf.ProjectId == projectId && 
                              pf.IsValid == true)
                 .ToList();

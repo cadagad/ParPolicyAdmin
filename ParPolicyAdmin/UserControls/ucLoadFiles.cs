@@ -82,6 +82,7 @@ namespace ParPolicyAdmin.UserControls
             }
 
             Cursor.Current = Cursors.WaitCursor;
+            tmrRefresh.Enabled = true;
 
             try
             {
@@ -141,6 +142,16 @@ namespace ParPolicyAdmin.UserControls
                 dgvFeeds.Columns["RowCount"].DisplayIndex = 1;
                 dgvFeeds.Columns["Status"].DisplayIndex = 2;
             }
+
+            int activeStatusCount = PolicyFeeds.Where(pf => pf.Status != "Not processed" && pf.Status != "Complete").Count();
+            if (activeStatusCount > 0)
+            {
+                tmrRefresh.Enabled = true;
+            }
+            else
+            {
+                tmrRefresh.Enabled = false;
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -150,7 +161,7 @@ namespace ParPolicyAdmin.UserControls
 
         private void tmrRefresh_Tick(object sender, EventArgs e)
         {
-            MessageBox.Show("Test");
+            GridRefresh();
         }
     }
 }
