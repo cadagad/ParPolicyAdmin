@@ -30,6 +30,11 @@ namespace ParPolicyConsole
                 Tools tools = new Tools();
                 tools.UploadPolicy();
             }
+            else if (args.Length > 0 && args[0].ToLower() == "extract-mailing-list")
+            {
+                Tools tools = new Tools();
+                tools.UploadPolicy();
+            }
             else
             {
                 /* Temporary for testing */

@@ -65,5 +65,24 @@ namespace ParPolicyConsole
 
             return true;
         }
+
+        public bool ExtractMailingList()
+        {
+            string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
+            string path = staging_folder + "\\" + "MailingCodes.txt";
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Error : MailingCodes.txt is expected on " + staging_folder);
+                return false;
+            }
+
+            string[] mailingCodes = File.ReadAllLines(path);
+            List<string> codes = mailingCodes.ToList();
+
+            Reports report = new Reports();
+            report.GenerateCstcFeed(codes);
+
+            return true;
+        }
     }
 }

@@ -4,8 +4,10 @@ using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,8 @@ namespace ParPolicyAdmin.UserControls
     {
         int _activeProjectId = 0;
 
+        private string Staging = String.Empty;
+
         public SourceRepo sourceFeedRepo;
         public PolicyFeedRepo policyFeedRepo;
 
@@ -25,6 +29,8 @@ namespace ParPolicyAdmin.UserControls
         public ucSubmit(int projectId)
         {
             InitializeComponent();
+
+            Staging = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
 
             sourceFeedRepo = new SourceRepo();
             policyFeedRepo = new PolicyFeedRepo();
@@ -41,12 +47,34 @@ namespace ParPolicyAdmin.UserControls
                 codes.Add(r.Cells["Code"].Value.ToString());
             }
 
-            if (codes.Count > 0)
+            try
             {
-                Reports report = new Reports();
-                report.GenerateCstcFeed(codes);
+                if (codes.Count > 0)
+                {
+                    DateTime startTime = DateTime.Now;
+
+                    string fn = Staging + "\\MailingCodes.txt";
+
+                    /* Delete if exist */
+                    if (File.Exists(fn))
+                        File.Delete(fn);
+
+                    foreach (string c in codes)
+                    {
+                        File.AppendAllText(fn, (c + "\n"));
+                    }
+
+                    Reports report = new Reports();
+                    report.GenerateCstcFeed(codes);
+                }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void ucSubmit_Load(object sender, EventArgs e)
@@ -68,6 +96,11 @@ namespace ParPolicyAdmin.UserControls
                 dgvSources.Columns["Code"].Width = 210;
                 dgvSources.Columns["Records"].Width = 75;
             }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
