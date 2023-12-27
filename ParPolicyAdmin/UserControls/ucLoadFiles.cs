@@ -147,6 +147,8 @@ namespace ParPolicyAdmin.UserControls
             if (activeStatusCount > 0)
             {
                 tmrRefresh.Enabled = true;
+                tmrRefresh.Stop();
+                tmrRefresh.Start();
             }
             else
             {
@@ -156,7 +158,7 @@ namespace ParPolicyAdmin.UserControls
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            
+            GridRefresh();
         }
 
         private void tmrRefresh_Tick(object sender, EventArgs e)

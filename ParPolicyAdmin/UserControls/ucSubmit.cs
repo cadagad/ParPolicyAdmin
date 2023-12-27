@@ -63,9 +63,6 @@ namespace ParPolicyAdmin.UserControls
                     {
                         File.AppendAllText(fn, (c + "\n"));
                     }
-
-                    Reports report = new Reports();
-                    report.GenerateCstcFeed(codes);
                 }
             }
             catch (Exception ex)
