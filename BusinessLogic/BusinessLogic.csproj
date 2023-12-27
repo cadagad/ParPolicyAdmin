@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202311161351224_Added status field.designer.cs">
       <DependentUpon>202311161351224_Added status field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312271512335_Added Status.cs" />
+    <Compile Include="Migrations\202312271512335_Added Status.designer.cs">
+      <DependentUpon>202312271512335_Added Status.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Barcode.cs" />
     <Compile Include="Models\BarcodeFeed.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Models\PolicyFeed.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Source.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\VwBarcodePolicy.cs" />
     <Compile Include="Models\VwPolicySummary.cs" />
     <Compile Include="Models\VwSourceSummaryByProject.cs" />
@@ -170,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202311161351224_Added status field.resx">
       <DependentUpon>202311161351224_Added status field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312271512335_Added Status.resx">
+      <DependentUpon>202312271512335_Added Status.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -82,6 +82,8 @@ namespace ParPolicyConsole
             Reports report = new Reports();
             report.GenerateCstcFeed(codes);
 
+            File.Delete(path);
+
             return true;
         }
     }

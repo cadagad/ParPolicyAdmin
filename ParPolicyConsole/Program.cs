@@ -39,7 +39,9 @@ namespace ParPolicyConsole
             {
                 /* Temporary for testing */
                 Tools tools = new Tools();
-                tools.UploadPolicy();
+                //tools.UploadPolicy();
+                tools.ExtractMailingList();
+
             }
         }
     }
