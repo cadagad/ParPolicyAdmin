@@ -27,21 +27,32 @@ namespace ParPolicyConsole
 
             if (args.Length > 0 && args[0].ToLower() == "upload-policy")
             {
+                Console.WriteLine("Processing Upload-Policy...");
                 Tools tools = new Tools();
                 tools.UploadPolicy();
             }
             else if (args.Length > 0 && args[0].ToLower() == "extract-mailing-list")
             {
+                Console.WriteLine("Processing Extract-Mailing-List");
                 Tools tools = new Tools();
-                tools.UploadPolicy();
+                tools.ExtractMailingList();
+            }
+            else if (args.Length > 0 && args[0].ToLower() == "upload-barcodes")
+            {
+                Console.WriteLine("Processing Upload-Barcodes");
+                Tools tools = new Tools();
+                tools.UploadBarcodes();
             }
             else
             {
-                /* Temporary for testing */
+                /* If no parameter - process all */
                 Tools tools = new Tools();
-                //tools.UploadPolicy();
-                tools.ExtractMailingList();
 
+                Console.WriteLine("Processing Upload-Policy...");
+                tools.UploadPolicy();
+
+                Console.WriteLine("Processing Extract-Mailing-List");
+                tools.ExtractMailingList();
             }
         }
     }

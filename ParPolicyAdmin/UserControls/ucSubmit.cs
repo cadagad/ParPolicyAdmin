@@ -40,16 +40,15 @@ namespace ParPolicyAdmin.UserControls
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            List<string> codes = new List<string>();
-
+            string str = String.Empty;
             foreach (DataGridViewRow r in dgvSources.SelectedRows)
             {
-                codes.Add(r.Cells["Code"].Value.ToString());
+                str = str + r.Cells["Code"].Value.ToString() + "\n";
             }
 
             try
             {
-                if (codes.Count > 0)
+                if (!String.IsNullOrEmpty(str))
                 {
                     DateTime startTime = DateTime.Now;
 
@@ -59,10 +58,7 @@ namespace ParPolicyAdmin.UserControls
                     if (File.Exists(fn))
                         File.Delete(fn);
 
-                    foreach (string c in codes)
-                    {
-                        File.AppendAllText(fn, (c + "\n"));
-                    }
+                    File.AppendAllText(fn, str);
                 }
             }
             catch (Exception ex)

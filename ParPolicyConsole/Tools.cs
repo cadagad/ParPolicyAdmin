@@ -7,6 +7,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -81,6 +82,55 @@ namespace ParPolicyConsole
 
             Reports report = new Reports();
             report.GenerateCstcFeed(codes);
+
+            File.Delete(path);
+
+            return true;
+        }
+
+        public bool UploadBarcodes()
+        {
+            string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
+            string path = staging_folder + "\\" + "Trigger_Barcodes.txt";
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Error : Trigger_Barcodes.txt is expected on " + staging_folder);
+                return false;
+            }
+
+            string[] feedIds = File.ReadAllLines(path);
+
+            foreach (string f in feedIds)
+            {
+                int feedId = 0;
+                if (!Int32.TryParse(f, out feedId))
+                {
+                    Console.WriteLine("Invalid Barcode FeedId : " + f);
+                    continue;
+                }
+
+                BarcodeFeedRepo barcodeFeedRepo = new BarcodeFeedRepo();
+                BarcodeRepo barcodeRepo = new BarcodeRepo();
+
+                List<Barcode> barcodes = barcodeRepo.Process_AllRecords_ToList(feedId, staging_folder);
+
+                int PAGE_SIZE = 5000;
+                List<List<Barcode>> chunks = ListExtensions.SplitList(barcodes, PAGE_SIZE);
+
+                int iteration = 0;
+                foreach (List<Barcode> b in chunks)
+                {
+                    Console.WriteLine(String.Format("Processing records {1} of {2}",
+                        (iteration * PAGE_SIZE),
+                        barcodes.Count()));
+
+                    iteration++;
+
+                    barcodeRepo.BulkInsertPolicy(b);
+                }
+
+                barcodeFeedRepo.SetFeedIsProcessed(feedId);
+            }
 
             File.Delete(path);
 
