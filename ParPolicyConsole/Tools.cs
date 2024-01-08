@@ -58,6 +58,8 @@ namespace ParPolicyConsole
                 }
 
                 DateTime endTime = DateTime.Now;
+
+                File.Delete(path);
             }
             catch (Exception ex)
             {

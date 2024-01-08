@@ -149,5 +149,10 @@ namespace ParPolicyAdmin
 
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnManualEntry_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

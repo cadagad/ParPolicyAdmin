@@ -1,8 +1,10 @@
 ﻿using BusinessLogic.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ParPolicyConsole
@@ -54,6 +56,25 @@ namespace ParPolicyConsole
                 Console.WriteLine("Processing Extract-Mailing-List");
                 tools.ExtractMailingList();
             }
+
+            /* Crude temporary solution */
+            var waitTime = TimeSpan.FromSeconds(30);
+
+            while (true)
+            {
+                bool fileFound = false;
+                if (File.Exists(@"C:\temp\Feeds.txt"))
+                {
+                    Console.WriteLine("Feeds.txt found....");
+                    fileFound = true;
+                }
+
+                if (fileFound == false)
+                    Console.WriteLine(DateTime.Now.ToShortTimeString() + " : No files found...");
+
+                Thread.Sleep(waitTime);
+            }
         }
+
     }
 }
