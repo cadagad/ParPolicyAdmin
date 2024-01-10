@@ -55,6 +55,23 @@ namespace BusinessLogic.Utilities
         public const int START_POS_BIRTHDATE = 318;
         public const int START_POS_KEYNAME = 327;
 
+        /* Start Positions from Annual.txt 0 base index */
+        public const int LEN_ANNUAL_MINLINE = 461;
+
+        public const int START_POS_ANNUAL_SYSCODE = 15;
+        public const int START_POS_ANNUAL_POLICYNUM = 18;
+        public const int START_POS_ANNUAL_POSTAL = 57;
+        public const int START_POS_ANNUAL_COUNTRY = 66;
+        public const int START_POS_ANNUAL_LANGUAGE = 84;
+        public const int START_POS_ANNUAL_HOLDERNAME = 87;
+        public const int START_POS_ANNUAL_ADDRESS_1 = 121;
+        public const int START_POS_ANNUAL_ADDRESS_2 = 155;
+        public const int START_POS_ANNUAL_ADDRESS_3 = 189;
+        public const int START_POS_ANNUAL_ADDRESS_4 = 223;
+        public const int START_POS_ANNUAL_ADDRESS_5 = 257;
+        public const int START_POS_ANNUAL_ADDRESS_6 = 291;
+        public const int START_POS_ANNUAL_KEYNAME = 416;
+
         public static string ConvertDate_yyyyMMdd(string dt)
         {
             string bd = String.Empty;

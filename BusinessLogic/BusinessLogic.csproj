@@ -108,7 +108,12 @@
     <Compile Include="Migrations\202312271512335_Added Status.designer.cs">
       <DependentUpon>202312271512335_Added Status.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401101501414_AnnualMailingList.cs" />
+    <Compile Include="Migrations\202401101501414_AnnualMailingList.designer.cs">
+      <DependentUpon>202401101501414_AnnualMailingList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AnnualMailingList.cs" />
     <Compile Include="Models\Barcode.cs" />
     <Compile Include="Models\BarcodeFeed.cs" />
     <Compile Include="Models\Policy.cs" />
@@ -178,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312271512335_Added Status.resx">
       <DependentUpon>202312271512335_Added Status.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401101501414_AnnualMailingList.resx">
+      <DependentUpon>202401101501414_AnnualMailingList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

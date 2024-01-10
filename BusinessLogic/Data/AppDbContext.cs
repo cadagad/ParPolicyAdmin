@@ -26,6 +26,7 @@ namespace BusinessLogic.Data
         public DbSet<Barcode> Barcodes { get; set; }
         public DbSet<BarcodeFeed> BarcodeFeeds { get; set; }
         public DbSet<Status> Status { get; set; }
+        public DbSet<AnnualMailingList> AnnualMailingList { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
