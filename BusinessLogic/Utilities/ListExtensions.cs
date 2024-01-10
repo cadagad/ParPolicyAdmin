@@ -21,6 +21,18 @@ namespace BusinessLogic.Utilities
             return list;
         }
 
+        public static List<List<AnnualMailingList>> SplitList(List<AnnualMailingList> mailings, int nSize = 30)
+        {
+            var list = new List<List<AnnualMailingList>>();
+
+            for (int i = 0; i < mailings.Count; i += nSize)
+            {
+                list.Add(mailings.GetRange(i, Math.Min(nSize, mailings.Count - i)));
+            }
+
+            return list;
+        }
+
         public static List<List<Barcode>> SplitList(List<Barcode> barcodes, int nSize = 30)
         {
             var list = new List<List<Barcode>>();

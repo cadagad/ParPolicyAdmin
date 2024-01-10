@@ -1,8 +1,10 @@
 ﻿using BusinessLogic.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.PeerToPeer;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +15,14 @@ namespace ParPolicyConsole
     {
         static void Main(string[] args)
         {
+            string Dropoff = ConfigurationManager.AppSettings["AnnualMailingFeed_Dropoff"];
+            string Staging = ConfigurationManager.AppSettings["AnnualMailingFeed_Staging"];
+            string Archive = ConfigurationManager.AppSettings["AnnualMailingFeed_Archive"];
+            string FeedName = ConfigurationManager.AppSettings["AnnualMailingFeed_Name"];
+
+            string TriggerPath = ConfigurationManager.AppSettings["TriggerPath"];
+            string TriggerFile = ConfigurationManager.AppSettings["TriggerFile_AnnualMailingList"];
+
             if (args.Length == 2)
             {
                 Console.WriteLine("Usage\n" +
@@ -45,16 +55,38 @@ namespace ParPolicyConsole
                 Tools tools = new Tools();
                 tools.UploadBarcodes();
             }
+            else if (args.Length > 0 && args[0].ToLower() == "upload-annual-mailing-list")
+            {
+                string trigger = Path.Combine(TriggerPath, TriggerFile);
+
+                /* Check if input feed exists */
+                if (File.Exists(trigger))
+                {
+                    Console.WriteLine("Processing Upload-Annual-Mailing-List");
+                    Tools tools = new Tools();
+                    tools.UploadAnnualMailingList();
+
+                    File.Delete(trigger);
+                }
+                else
+                {
+                    Console.WriteLine("No trigger found for Upload-Annual-Mailing-List.");
+                    Console.WriteLine(String.Format("Reference : {0}.", trigger));
+                }
+            }
             else
             {
                 /* If no parameter - process all */
                 Tools tools = new Tools();
 
                 Console.WriteLine("Processing Upload-Policy...");
-                tools.UploadPolicy();
+                //tools.UploadPolicy();
 
                 Console.WriteLine("Processing Extract-Mailing-List");
-                tools.ExtractMailingList();
+                //tools.ExtractMailingList();
+
+                Console.WriteLine("Processing Upload-Annual-Mailing-List");
+                tools.UploadAnnualMailingList();
             }
 
             /* Crude temporary solution */

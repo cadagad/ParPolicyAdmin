@@ -73,6 +73,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AnnualMailingListRepo.cs" />
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Data\BarcodeFeedRepo.cs" />
     <Compile Include="Data\BarcodeRepo.cs" />

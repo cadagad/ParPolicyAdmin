@@ -90,6 +90,34 @@ namespace ParPolicyConsole
             return true;
         }
 
+        public void UploadAnnualMailingList()
+        {         
+            Console.WriteLine("Uploading - AnnualMailingList - Start...");
+
+            AnnualMailingListRepo annualMailingListRepo = new AnnualMailingListRepo();
+            List<AnnualMailingList> annualMailings = annualMailingListRepo.Process_AnnualMailing_ToList();
+
+            Console.WriteLine("Inserting records by chunk.");
+            Console.WriteLine(String.Format("Total number of records : {0}.", annualMailings.Count()));
+
+            int PAGE_SIZE = 2000;
+            List<List<AnnualMailingList>> chunks = ListExtensions.SplitList(annualMailings, PAGE_SIZE);
+
+            int iteration = 0;
+            foreach (List<AnnualMailingList> b in chunks)
+            {
+                Console.WriteLine(String.Format("Processing records {0} of {1}",
+                    (iteration * PAGE_SIZE),
+                    annualMailings.Count()));
+
+                iteration++;
+
+                annualMailingListRepo.Insert_AnnualMailings_ByBulk(b);
+            }
+
+            Console.WriteLine("Uploading - AnnualMailingList - End...");
+        }
+
         public bool UploadBarcodes()
         {
             string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];

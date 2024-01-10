@@ -32,7 +32,7 @@ namespace ParPolicyAdmin
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panelMain = new System.Windows.Forms.Panel();
             this.btnLateReturns = new System.Windows.Forms.Button();
-            this.btnManualEntry = new System.Windows.Forms.Button();
+            this.btnAnnualMailingList = new System.Windows.Forms.Button();
             this.btnLoadBarcodes = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnReviewData = new System.Windows.Forms.Button();
@@ -54,7 +54,7 @@ namespace ParPolicyAdmin
             // 
             this.panelMain.BackColor = System.Drawing.Color.Gray;
             this.panelMain.Controls.Add(this.btnLateReturns);
-            this.panelMain.Controls.Add(this.btnManualEntry);
+            this.panelMain.Controls.Add(this.btnAnnualMailingList);
             this.panelMain.Controls.Add(this.btnLoadBarcodes);
             this.panelMain.Controls.Add(this.btnSubmit);
             this.panelMain.Controls.Add(this.btnReviewData);
@@ -87,25 +87,25 @@ namespace ParPolicyAdmin
             this.btnLateReturns.UseVisualStyleBackColor = true;
             this.btnLateReturns.Click += new System.EventHandler(this.btnLateReturns_Click);
             // 
-            // btnManualEntry
+            // btnAnnualMailingList
             // 
-            this.btnManualEntry.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnManualEntry.FlatAppearance.BorderSize = 0;
-            this.btnManualEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnManualEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManualEntry.ForeColor = System.Drawing.Color.Snow;
-            this.btnManualEntry.Image = global::ParPolicyAdmin.Properties.Resources.sync;
-            this.btnManualEntry.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnManualEntry.Location = new System.Drawing.Point(0, 365);
-            this.btnManualEntry.Name = "btnManualEntry";
-            this.btnManualEntry.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnManualEntry.Size = new System.Drawing.Size(220, 60);
-            this.btnManualEntry.TabIndex = 6;
-            this.btnManualEntry.Text = "  Manual Entry";
-            this.btnManualEntry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnManualEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnManualEntry.UseVisualStyleBackColor = true;
-            this.btnManualEntry.Click += new System.EventHandler(this.btnManualEntry_Click);
+            this.btnAnnualMailingList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAnnualMailingList.FlatAppearance.BorderSize = 0;
+            this.btnAnnualMailingList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnnualMailingList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnnualMailingList.ForeColor = System.Drawing.Color.Snow;
+            this.btnAnnualMailingList.Image = global::ParPolicyAdmin.Properties.Resources.sync;
+            this.btnAnnualMailingList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAnnualMailingList.Location = new System.Drawing.Point(0, 365);
+            this.btnAnnualMailingList.Name = "btnAnnualMailingList";
+            this.btnAnnualMailingList.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAnnualMailingList.Size = new System.Drawing.Size(220, 60);
+            this.btnAnnualMailingList.TabIndex = 6;
+            this.btnAnnualMailingList.Text = "  Annual Mailing List";
+            this.btnAnnualMailingList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAnnualMailingList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAnnualMailingList.UseVisualStyleBackColor = true;
+            this.btnAnnualMailingList.Click += new System.EventHandler(this.btnAnnualMailingList_Click);
             // 
             // btnLoadBarcodes
             // 
@@ -298,7 +298,7 @@ namespace ParPolicyAdmin
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Button btnProject;
-        private System.Windows.Forms.Button btnManualEntry;
+        private System.Windows.Forms.Button btnAnnualMailingList;
         private System.Windows.Forms.Button btnLoadBarcodes;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnReviewData;
