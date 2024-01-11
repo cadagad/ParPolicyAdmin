@@ -16,6 +16,15 @@ namespace BusinessLogic.Data
             _appDbContext = new AppDbContext();
         }
 
+        public List<string> GetAllSourceCodes()
+        {
+            List<string> sources = new List<string>();
+
+            sources = _appDbContext.Sources.Select(s => s.Code).ToList();
+
+            return sources;
+        }
+
         public List<VwSourceSummaryByProject> GetAllSources_WithCount(int projectId)
         {
             List<VwSourceSummaryByProject> output = new List<VwSourceSummaryByProject>();

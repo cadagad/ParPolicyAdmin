@@ -40,6 +40,27 @@ namespace BusinessLogic.Data
             TriggerFile = ConfigurationManager.AppSettings["TriggerFile_AnnualMailingList"];
         }
 
+        public List<AnnualMailingList> GetAnnualMailings_BySystemCode(string code, string search = null)
+        {
+            List<AnnualMailingList> mailingList = new List<AnnualMailingList>();
+
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                mailingList = _appDbContext.AnnualMailingList
+                .Where(aml => aml.SystemCode == code)
+                .ToList();
+            }
+            else
+            {
+                mailingList = _appDbContext.AnnualMailingList
+                .Where(aml => aml.SystemCode == code && 
+                             (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
+                .ToList();
+            }
+            
+            return mailingList;
+        }
+
         public List<AnnualMailingList> Process_AnnualMailing_ToList()
         {
             #region Exception Handling
@@ -149,6 +170,12 @@ namespace BusinessLogic.Data
         public void Insert_AnnualMailings_ByBulk(List<AnnualMailingList> mailing)
         {
             _appDbContext.AnnualMailingList.AddRange(mailing);
+            _appDbContext.SaveChanges();
+        }
+
+        public void Insert_AnnualMailings(AnnualMailingList mailing)
+        {
+            _appDbContext.AnnualMailingList.Add(mailing);
             _appDbContext.SaveChanges();
         }
 
