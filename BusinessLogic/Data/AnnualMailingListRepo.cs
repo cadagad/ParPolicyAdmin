@@ -61,6 +61,65 @@ namespace BusinessLogic.Data
             return mailingList;
         }
 
+        public List<AnnualMailingList> GetAnnualMailings_NoTracking_BySystemCode(string code, string search = null)
+        {
+            List<AnnualMailingList> mailingList = new List<AnnualMailingList>();
+
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                mailingList = _appDbContext.AnnualMailingList
+                    .AsNoTracking()
+                    .Where(aml => aml.SystemCode == code)
+                    .ToList();
+            }
+            else
+            {
+                mailingList = _appDbContext.AnnualMailingList
+                    .AsNoTracking()
+                    .Where(aml => aml.SystemCode == code &&
+                                 (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
+                    .ToList();
+            }
+
+            return mailingList;
+        }
+
+        public AnnualMailingList GetAnnualMailings_ById(int id)
+        {
+            AnnualMailingList mailing = new AnnualMailingList();
+            
+            mailing = _appDbContext.AnnualMailingList
+                .Where(aml => aml.AnnualMailingListId == id)
+                .FirstOrDefault();
+
+            return mailing;
+        }
+
+        public void UpdateMailing_ById(int mailingId, AnnualMailingList mailing)
+        {
+            AnnualMailingList aml = _appDbContext.AnnualMailingList
+                .Where(m => m.AnnualMailingListId == mailingId).FirstOrDefault();
+
+            if (aml != null) 
+            {
+                aml.SystemCode = mailing.SystemCode.ToUpper();
+                aml.HolderName = mailing.HolderName.ToUpper();
+                aml.PolicyNumber = mailing.PolicyNumber.ToUpper();
+                aml.Address1 = mailing.Address1.ToUpper();
+                aml.Address2 = mailing.Address2.ToUpper();
+                aml.Address3 = mailing.Address3.ToUpper();
+                aml.Address4 = mailing.Address4.ToUpper();
+                aml.Address5 = mailing.Address5.ToUpper();
+                aml.Address6 = mailing.Address6.ToUpper();
+                aml.LanguageCode = mailing.LanguageCode.ToUpper();
+                aml.CountryCode = mailing.CountryCode.ToUpper();
+                aml.PostalCode = mailing.PostalCode.ToUpper();
+                aml.KeyName = mailing.KeyName.ToUpper();
+
+                _appDbContext.SaveChanges();
+            }
+        }
+
         public List<AnnualMailingList> Process_AnnualMailing_ToList()
         {
             #region Exception Handling

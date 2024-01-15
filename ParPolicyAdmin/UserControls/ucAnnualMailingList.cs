@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Data;
 using BusinessLogic.Migrations;
 using BusinessLogic.Models;
+using ParPolicyAdmin.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +44,7 @@ namespace ParPolicyAdmin.UserControls
             BindingSource bs = new BindingSource();
             bs.DataSource = sources;
             cbSystemCode.DataSource = bs;
-            cbSystemCode.SelectedIndex = 1;
+            cbSystemCode.SelectedIndex = 0;
         }
 
         private void ucAnnualMailingList_Load(object sender, EventArgs e)
@@ -61,17 +62,20 @@ namespace ParPolicyAdmin.UserControls
             GridRefresh();
         }
 
-        private void GridRefresh(string sysCode = null, string searchText = null)
+        private void GridRefresh(string sysCode = null, string searchText = null, bool forceRefresh = false)
         {
             string code = String.Empty;
 
             if (sysCode == null)
-                code = "C01";
+                code = "Undefined";
             else
                 code = sysCode;
 
             List<Md.AnnualMailingList> mailings = new List<Md.AnnualMailingList>();
-            mailings = AnnualMailingListRepo.GetAnnualMailings_BySystemCode(code, searchText);
+            if (forceRefresh)
+                mailings = AnnualMailingListRepo.GetAnnualMailings_NoTracking_BySystemCode(code, searchText);
+            else
+                mailings = AnnualMailingListRepo.GetAnnualMailings_BySystemCode(code, searchText);
 
             lblRecordCount.Text = "Record(s) : " + mailings.Count().ToString();
 
@@ -189,6 +193,40 @@ namespace ParPolicyAdmin.UserControls
             {
                 btnSearch.PerformClick();
             }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmAnnualMailing frm = new frmAnnualMailing();
+            frm.ShowDialog();
+            frm.Close();
+            frm.Dispose();
+
+            /* Refresh the Grid after add */
+            string code = cbSystemCode.Text;
+            GridRefresh(code);
+        }
+
+        private void dgvAnnualMailingList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedRow = dgvAnnualMailingList.Rows[e.RowIndex];
+            int cellValue = Convert.ToInt32(selectedRow.Cells[0].Value);
+
+            frmAnnualMailing frm = new frmAnnualMailing(cellValue);
+            frm.ShowDialog();
+            frm.Close();
+            frm.Dispose();
+
+            /* Refresh the Grid after add */
+            string code = cbSystemCode.Text;
+            string searchText = tbSearch.Text;
+
+            GridRefresh(code, searchText, true);
         }
     }
 }

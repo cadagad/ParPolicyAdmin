@@ -40,6 +40,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblRecordCount = new System.Windows.Forms.Label();
+            this.btnReviewDeficient = new System.Windows.Forms.Button();
+            this.btnReviewDuplicates = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnExportCsv = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnnualMailingList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +79,7 @@
             this.dgvAnnualMailingList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAnnualMailingList.Size = new System.Drawing.Size(894, 377);
             this.dgvAnnualMailingList.TabIndex = 11;
+            this.dgvAnnualMailingList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAnnualMailingList_CellContentDoubleClick);
             // 
             // label2
             // 
@@ -103,12 +109,12 @@
             // btnUpload
             // 
             this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpload.BackColor = System.Drawing.SystemColors.Control;
+            this.btnUpload.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpload.Location = new System.Drawing.Point(807, 29);
+            this.btnUpload.Location = new System.Drawing.Point(807, 3);
             this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(90, 24);
+            this.btnUpload.Size = new System.Drawing.Size(90, 30);
             this.btnUpload.TabIndex = 17;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = false;
@@ -171,20 +177,88 @@
             // 
             // lblRecordCount
             // 
-            this.lblRecordCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRecordCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRecordCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecordCount.ForeColor = System.Drawing.Color.Green;
-            this.lblRecordCount.Location = new System.Drawing.Point(737, 439);
+            this.lblRecordCount.Location = new System.Drawing.Point(737, 40);
             this.lblRecordCount.Name = "lblRecordCount";
             this.lblRecordCount.Size = new System.Drawing.Size(160, 13);
             this.lblRecordCount.TabIndex = 23;
             this.lblRecordCount.Text = "Record(s) : ";
             this.lblRecordCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // btnReviewDeficient
+            // 
+            this.btnReviewDeficient.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnReviewDeficient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReviewDeficient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReviewDeficient.Location = new System.Drawing.Point(363, 31);
+            this.btnReviewDeficient.Name = "btnReviewDeficient";
+            this.btnReviewDeficient.Size = new System.Drawing.Size(135, 23);
+            this.btnReviewDeficient.TabIndex = 25;
+            this.btnReviewDeficient.Text = "Review Deficient";
+            this.btnReviewDeficient.UseVisualStyleBackColor = false;
+            // 
+            // btnReviewDuplicates
+            // 
+            this.btnReviewDuplicates.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnReviewDuplicates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReviewDuplicates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReviewDuplicates.Location = new System.Drawing.Point(363, 4);
+            this.btnReviewDuplicates.Name = "btnReviewDuplicates";
+            this.btnReviewDuplicates.Size = new System.Drawing.Size(135, 23);
+            this.btnReviewDuplicates.TabIndex = 24;
+            this.btnReviewDuplicates.Text = "Review Duplicates";
+            this.btnReviewDuplicates.UseVisualStyleBackColor = false;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(807, 439);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(90, 30);
+            this.btnAdd.TabIndex = 26;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.SystemColors.Info;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Location = new System.Drawing.Point(528, 4);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(135, 23);
+            this.btnExport.TabIndex = 27;
+            this.btnExport.Text = "Export (Outbound)";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnExportCsv
+            // 
+            this.btnExportCsv.BackColor = System.Drawing.SystemColors.Info;
+            this.btnExportCsv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportCsv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportCsv.Location = new System.Drawing.Point(528, 31);
+            this.btnExportCsv.Name = "btnExportCsv";
+            this.btnExportCsv.Size = new System.Drawing.Size(135, 23);
+            this.btnExportCsv.TabIndex = 28;
+            this.btnExportCsv.Text = "Export (Csv)";
+            this.btnExportCsv.UseVisualStyleBackColor = false;
+            // 
             // ucAnnualMailingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExportCsv);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnReviewDeficient);
+            this.Controls.Add(this.btnReviewDuplicates);
             this.Controls.Add(this.lblRecordCount);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label3);
@@ -216,5 +290,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblRecordCount;
+        private System.Windows.Forms.Button btnReviewDeficient;
+        private System.Windows.Forms.Button btnReviewDuplicates;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnExportCsv;
     }
 }
