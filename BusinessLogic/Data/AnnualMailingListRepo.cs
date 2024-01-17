@@ -252,5 +252,41 @@ namespace BusinessLogic.Data
 
             return true;
         }
+
+        public void GenerateOutboundFeed(string path)
+        {
+            List<AnnualMailingList> aml = _appDbContext.AnnualMailingList
+                .Where(a => a.UserFlaggedDuplicate == false &&
+                            a.UserFlaggedDeficient == false &&
+                            a.UserFlaggedExclusion == false).ToList();
+
+            /* Delete if exist */
+            if (File.Exists(path))
+                File.Delete(path);
+
+            /* Process limited rows for better efficiency */
+            int limiter = 1000;
+            int last_row = aml.Count();
+
+            for (int i = 0; i <= (last_row / limiter); i++)
+            {
+                string text = String.Empty;
+                for (int j = 0; j < limiter; j++)
+                {
+                    int index = (limiter * i) + j;
+
+                    /* Exit if last row */
+                    if (index == last_row)
+                        break;
+
+                    /* Party */
+                    string p = aml[index].ToOutboundFormat() + "\n";
+                    text = text + p;
+                }
+
+                /* Append data to out_file */
+                File.AppendAllText(path, text);
+            }
+        }
     }
 }

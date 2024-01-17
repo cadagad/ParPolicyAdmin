@@ -59,5 +59,48 @@ namespace BusinessLogic.Models
         public bool? UserFlaggedExclusion { get; set; } = false;
 
         public bool? UserManualAdd { get; set; } = false;
+
+        /* Format fields to vendor specification */
+        public string ToOutboundFormat()
+        {
+            string filler1 = "000000000000000";
+            string spaces1 = "  ";
+            string filler2 = "000";
+            string SINNumber = "00000000000";
+            string filler3 = "0000";
+            string filler4 = "                 ";
+            string filler5 = "00";
+            string votes = "000000000010000";
+            string filler6 = "0000000000000000000000000000000000000000000000000000000000000000000000000000";
+            string certificateNumber = "         ";
+
+            return String.Format(
+                "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}" +
+                "{10}{11}{12}{13}{14}{15}{16}{17}{18}{19}" +
+                "{20}{21}{22}",
+                filler1,
+                this.SystemCode != null ? this.SystemCode.PadRight(3) : String.Empty.PadRight(3),
+                this.PolicyNumber != null ? this.PolicyNumber.PadRight(10) : String.Empty.PadRight(10),
+                certificateNumber,
+                spaces1,
+                filler2,
+                SINNumber,
+                filler3,
+                this.PostalCode != null ? this.PostalCode.PadRight(9) : String.Empty.PadRight(9),
+                this.CountryCode != null ? this.CountryCode.PadRight(1) : String.Empty.PadRight(1),
+                filler4,
+                this.LanguageCode != null ? this.LanguageCode.PadRight(1) : String.Empty.PadRight(1),
+                filler5,
+                this.HolderName != null ? this.HolderName.PadRight(34) : String.Empty.PadRight(34),
+                this.Address1 != null ? this.Address1.PadRight(34) : String.Empty.PadRight(34),
+                this.Address2 != null ? this.Address2.PadRight(34) : String.Empty.PadRight(34),
+                this.Address3 != null ? this.Address3.PadRight(34) : String.Empty.PadRight(34),
+                this.Address4 != null ? this.Address4.PadRight(34) : String.Empty.PadRight(34),
+                this.Address5 != null ? this.Address5.PadRight(34) : String.Empty.PadRight(34),
+                this.Address6 != null ? this.Address6.PadRight(34) : String.Empty.PadRight(34),
+                votes,
+                filler6,
+                this.KeyName != null ? this.KeyName.PadRight(32) : String.Empty.PadRight(32));
+        }
     }   
 }

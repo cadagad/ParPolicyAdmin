@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvAnnualMailingList = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.lblDropoffPath = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.btnReviewDuplicates = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
-            this.btnExportCsv = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnnualMailingList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,23 +54,23 @@
             this.dgvAnnualMailingList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAnnualMailingList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAnnualMailingList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvAnnualMailingList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAnnualMailingList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAnnualMailingList.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvAnnualMailingList.Location = new System.Drawing.Point(3, 59);
             this.dgvAnnualMailingList.Name = "dgvAnnualMailingList";
             this.dgvAnnualMailingList.RowHeadersWidth = 20;
@@ -217,7 +217,7 @@
             this.btnAdd.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(807, 439);
+            this.btnAdd.Location = new System.Drawing.Point(711, 442);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 30);
             this.btnAdd.TabIndex = 26;
@@ -238,23 +238,25 @@
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // btnExportCsv
+            // BtnEdit
             // 
-            this.btnExportCsv.BackColor = System.Drawing.SystemColors.Info;
-            this.btnExportCsv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportCsv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportCsv.Location = new System.Drawing.Point(528, 31);
-            this.btnExportCsv.Name = "btnExportCsv";
-            this.btnExportCsv.Size = new System.Drawing.Size(135, 23);
-            this.btnExportCsv.TabIndex = 28;
-            this.btnExportCsv.Text = "Export (Csv)";
-            this.btnExportCsv.UseVisualStyleBackColor = false;
+            this.BtnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnEdit.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnEdit.Location = new System.Drawing.Point(807, 442);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(90, 30);
+            this.BtnEdit.TabIndex = 29;
+            this.BtnEdit.Text = "Edit";
+            this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // ucAnnualMailingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnExportCsv);
+            this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnReviewDeficient);
@@ -294,6 +296,6 @@
         private System.Windows.Forms.Button btnReviewDuplicates;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btnExportCsv;
+        private System.Windows.Forms.Button BtnEdit;
     }
 }

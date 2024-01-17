@@ -197,36 +197,83 @@ namespace ParPolicyAdmin.UserControls
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            string folder = String.Empty;
+            string fn = ConfigurationManager.AppSettings["CstcFeed"];
 
+            /* User selects folder to save */
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                    folder = fbd.SelectedPath;
+                else
+                    return;
+            }
+
+            string path = Path.Combine(folder, fn);
+
+            /* Delete if exist */
+            if (File.Exists(path))
+                File.Delete(path);
+
+            AnnualMailingListRepo.GenerateOutboundFeed(path);
+
+            MessageBox.Show(String.Format("Vendor feed successfully generated. Please check:\n {0}", path),
+                    "Success!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             frmAnnualMailing frm = new frmAnnualMailing();
             frm.ShowDialog();
+
+            /* Refresh grid if save was performed */
+            if (frm.IsSaved)
+            {
+                string code = cbSystemCode.Text;
+                GridRefresh(code);
+            }
+
             frm.Close();
             frm.Dispose();
-
-            /* Refresh the Grid after add */
-            string code = cbSystemCode.Text;
-            GridRefresh(code);
         }
 
         private void dgvAnnualMailingList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow selectedRow = dgvAnnualMailingList.Rows[e.RowIndex];
+            BtnEdit.PerformClick();
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvAnnualMailingList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataGridViewRow selectedRow = dgvAnnualMailingList.SelectedRows[0];
+
             int cellValue = Convert.ToInt32(selectedRow.Cells[0].Value);
 
             frmAnnualMailing frm = new frmAnnualMailing(cellValue);
             frm.ShowDialog();
+
+            /* Refresh grid if save was performed */
+            if (frm.IsSaved)
+            {
+                /* Refresh the Grid after add */
+                string code = cbSystemCode.Text;
+                string searchText = tbSearch.Text;
+
+                /* force refresh */
+                GridRefresh(code, searchText, true);
+            }
+
             frm.Close();
             frm.Dispose();
-
-            /* Refresh the Grid after add */
-            string code = cbSystemCode.Text;
-            string searchText = tbSearch.Text;
-
-            GridRefresh(code, searchText, true);
         }
     }
 }

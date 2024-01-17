@@ -23,8 +23,11 @@ namespace ParPolicyAdmin.Forms
 
         private int MailingId;
 
+        public bool IsSaved;
+
         public frmAnnualMailing()
         {
+            IsSaved = false;
             InitializeComponent();
             MailingId = 0;
         }
@@ -153,7 +156,8 @@ namespace ParPolicyAdmin.Forms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 }
-                    
+
+                IsSaved = true;
                 this.Close();
             }
             catch(Exception ex)
