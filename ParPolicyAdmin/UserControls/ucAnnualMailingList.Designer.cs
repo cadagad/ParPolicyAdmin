@@ -45,6 +45,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnnualMailingList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +80,7 @@
             this.dgvAnnualMailingList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAnnualMailingList.Size = new System.Drawing.Size(894, 377);
             this.dgvAnnualMailingList.TabIndex = 11;
-            this.dgvAnnualMailingList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAnnualMailingList_CellContentDoubleClick);
+            this.dgvAnnualMailingList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAnnualMailingList_CellDoubleClick);
             // 
             // label2
             // 
@@ -89,10 +90,9 @@
             this.label2.ForeColor = System.Drawing.Color.Green;
             this.label2.Location = new System.Drawing.Point(3, 439);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(537, 13);
+            this.label2.Size = new System.Drawing.Size(398, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "To upload Annual Mailing List : Copy ANNUAL.TXT file on the folder below and clic" +
-    "k \'Upload\'";
+            this.label2.Text = "Notes: Copy ANNUAL.TXT file on the folder below and click \'Upload\'";
             // 
             // lblDropoffPath
             // 
@@ -217,7 +217,7 @@
             this.btnAdd.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(711, 442);
+            this.btnAdd.Location = new System.Drawing.Point(615, 442);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 30);
             this.btnAdd.TabIndex = 26;
@@ -244,7 +244,7 @@
             this.BtnEdit.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnEdit.Location = new System.Drawing.Point(807, 442);
+            this.BtnEdit.Location = new System.Drawing.Point(711, 442);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(90, 30);
             this.BtnEdit.TabIndex = 29;
@@ -252,10 +252,25 @@
             this.BtnEdit.UseVisualStyleBackColor = false;
             this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(807, 442);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(90, 30);
+            this.btnDelete.TabIndex = 30;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // ucAnnualMailingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnAdd);
@@ -297,5 +312,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button BtnEdit;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

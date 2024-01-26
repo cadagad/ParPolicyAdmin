@@ -84,42 +84,39 @@ namespace ParPolicyAdmin.UserControls
 
             dgvAnnualMailingList.DataSource = src;
 
-            if (src.Count > 0)
-            {
-                dgvAnnualMailingList.Columns["AnnualMailingListId"].Visible = false;
-                dgvAnnualMailingList.Columns["LineNumber"].Visible = false;
-                dgvAnnualMailingList.Columns["CountryCode"].Visible = false;
-                dgvAnnualMailingList.Columns["LanguageCode"].Visible = false;
-                dgvAnnualMailingList.Columns["PostalCode"].Visible = false;
-                dgvAnnualMailingList.Columns["KeyName"].Visible = false;
+            dgvAnnualMailingList.Columns["AnnualMailingListId"].Visible = false;
+            dgvAnnualMailingList.Columns["LineNumber"].Visible = false;
+            dgvAnnualMailingList.Columns["CountryCode"].Visible = false;
+            dgvAnnualMailingList.Columns["LanguageCode"].Visible = false;
+            dgvAnnualMailingList.Columns["PostalCode"].Visible = false;
+            dgvAnnualMailingList.Columns["KeyName"].Visible = false;
 
-                dgvAnnualMailingList.Columns["UserFlaggedDuplicate"].Visible = false;
-                dgvAnnualMailingList.Columns["UserFlaggedDeficient"].Visible = false;
-                dgvAnnualMailingList.Columns["UserFlaggedExclusion"].Visible = false;
-                dgvAnnualMailingList.Columns["UserManualAdd"].Visible = false;
+            dgvAnnualMailingList.Columns["UserFlaggedDuplicate"].Visible = false;
+            dgvAnnualMailingList.Columns["UserFlaggedDeficient"].Visible = false;
+            dgvAnnualMailingList.Columns["UserFlaggedExclusion"].Visible = false;
+            dgvAnnualMailingList.Columns["UserManualAdd"].Visible = false;
 
-                dgvAnnualMailingList.Columns["Address5"].Visible = false;
-                dgvAnnualMailingList.Columns["Address6"].Visible = false;
+            dgvAnnualMailingList.Columns["Address5"].Visible = false;
+            dgvAnnualMailingList.Columns["Address6"].Visible = false;
 
-                dgvAnnualMailingList.Columns["PolicyNumber"].ReadOnly = true;
-                dgvAnnualMailingList.Columns["SystemCode"].ReadOnly = true;
-                dgvAnnualMailingList.Columns["HolderName"].ReadOnly = true;
-                dgvAnnualMailingList.Columns["Address1"].ReadOnly = true;
-                dgvAnnualMailingList.Columns["Address2"].ReadOnly = true;
-                dgvAnnualMailingList.Columns["Address3"].ReadOnly = true;
-                dgvAnnualMailingList.Columns["Address4"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["PolicyNumber"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["SystemCode"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["HolderName"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["Address1"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["Address2"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["Address3"].ReadOnly = true;
+            dgvAnnualMailingList.Columns["Address4"].ReadOnly = true;
 
-                dgvAnnualMailingList.Columns["PolicyNumber"].Width = 90;
-                dgvAnnualMailingList.Columns["HolderName"].Width = 175;
-                dgvAnnualMailingList.Columns["SystemCode"].Width = 50;
-                dgvAnnualMailingList.Columns["Address1"].Width = 225;
-                dgvAnnualMailingList.Columns["Address2"].Width = 225;
-                dgvAnnualMailingList.Columns["Address3"].Width = 175;
-                dgvAnnualMailingList.Columns["Address4"].Width = 175;
+            dgvAnnualMailingList.Columns["PolicyNumber"].Width = 90;
+            dgvAnnualMailingList.Columns["HolderName"].Width = 175;
+            dgvAnnualMailingList.Columns["SystemCode"].Width = 50;
+            dgvAnnualMailingList.Columns["Address1"].Width = 225;
+            dgvAnnualMailingList.Columns["Address2"].Width = 225;
+            dgvAnnualMailingList.Columns["Address3"].Width = 175;
+            dgvAnnualMailingList.Columns["Address4"].Width = 175;
 
-                dgvAnnualMailingList.Columns["SystemCode"].HeaderText = "Code";
-                dgvAnnualMailingList.Columns["PolicyNumber"].HeaderText = "Policy";
-            }
+            dgvAnnualMailingList.Columns["SystemCode"].HeaderText = "Code";
+            dgvAnnualMailingList.Columns["PolicyNumber"].HeaderText = "Policy";
         }
 
         private void btnUpload_Click(object sender, EventArgs e)
@@ -228,6 +225,7 @@ namespace ParPolicyAdmin.UserControls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             frmAnnualMailing frm = new frmAnnualMailing();
+            frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
 
             /* Refresh grid if save was performed */
@@ -241,11 +239,6 @@ namespace ParPolicyAdmin.UserControls
             frm.Dispose();
         }
 
-        private void dgvAnnualMailingList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            BtnEdit.PerformClick();
-        }
-
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (dgvAnnualMailingList.SelectedRows.Count == 0)
@@ -256,9 +249,10 @@ namespace ParPolicyAdmin.UserControls
 
             DataGridViewRow selectedRow = dgvAnnualMailingList.SelectedRows[0];
 
-            int cellValue = Convert.ToInt32(selectedRow.Cells[0].Value);
+            int id = Convert.ToInt32(selectedRow.Cells[0].Value);
 
-            frmAnnualMailing frm = new frmAnnualMailing(cellValue);
+            frmAnnualMailing frm = new frmAnnualMailing(id);
+            frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
 
             /* Refresh grid if save was performed */
@@ -274,6 +268,34 @@ namespace ParPolicyAdmin.UserControls
 
             frm.Close();
             frm.Dispose();
+        }
+
+        private void dgvAnnualMailingList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BtnEdit.PerformClick();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvAnnualMailingList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataGridViewRow selectedRow = dgvAnnualMailingList.SelectedRows[0];
+
+            int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+            string holder = selectedRow.Cells["HolderName"].Value.ToString();
+
+            DialogResult dr = MessageBox.Show(
+                String.Format("Are you sure you want to remove entry [{0}]?", holder),
+                "Confirm",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.Cancel)
+                return;
         }
     }
 }

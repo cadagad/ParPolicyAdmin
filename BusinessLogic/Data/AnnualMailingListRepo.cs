@@ -3,6 +3,7 @@ using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -249,6 +250,20 @@ namespace BusinessLogic.Data
             {
                 throw new Exception("Error : " + ex.Message);
             }
+
+            return true;
+        }
+
+        public bool Delete_AnnualMailings_ById(int id)
+        {
+            AnnualMailingList aml = _appDbContext.AnnualMailingList
+                .Where(m => m.AnnualMailingListId == id).FirstOrDefault();
+
+            if (aml == null)
+                return false;
+
+            aml.UserFlaggedExclusion = true;
+            _appDbContext.SaveChanges();
 
             return true;
         }
