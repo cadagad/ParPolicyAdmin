@@ -243,7 +243,7 @@ namespace BusinessLogic.Data
         {
             try
             {
-                string sql = String.Format("DELETE FROM dbo.CurrentPolicy)");
+                string sql = String.Format("DELETE FROM dbo.AnnualMailingLists)");
                 _appDbContext.Database.ExecuteSqlCommand(sql);
             }
             catch (Exception ex)
@@ -302,6 +302,47 @@ namespace BusinessLogic.Data
                 /* Append data to out_file */
                 File.AppendAllText(path, text);
             }
+        }
+
+        public void UpdateMailingList_FromPolicies()
+        {
+            try
+            {
+                string sql =
+                    @"update dbo.AnnualMailingLists 
+                      set Address1 = b.Address1,
+	                      Address2 = b.Address2,
+	                      Address3 = b.Address3,
+	                      Address4 = b.Address4,
+	                      Address5 = b.Address5,
+	                      Address6 = b.Address6,
+	                      PostalCode = b.PostalCode
+                      from dbo.AnnualMailingLists a
+                      inner join dbo.Policies b on a.PolicyNumber = b.PolicyNumber and a.SystemCode = b.SystemCode
+                      inner join dbo.PolicyFeeds c on b.PolicyFeedId = c.PolicyFeedId
+                      inner join dbo.Projects d on c.ProjectId = d.ProjectId
+                      where 
+	                      d.IsActive = 1 and
+	                      a.Address1 <> b.Address1 and
+	                      b.Address1 is not null";
+                _appDbContext.Database.ExecuteSqlCommand(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error : " + ex.Message);
+            }
+        }
+
+        public int UpdateMailingList_Count()
+        {
+            int cnt = (from a in _appDbContext.AnnualMailingList
+                       from b in _appDbContext.Policy.Where(x => a.PolicyNumber == x.PolicyNumber && a.SystemCode == x.SystemCode) 
+                       join c in _appDbContext.PolicyFeeds on b.PolicyFeedId equals c.PolicyFeedId
+                       join d in _appDbContext.Projects on c.ProjectId equals d.ProjectId
+                       where d.IsActive == true && a.Address1 != b.Address1
+                       select a).Count();
+
+            return cnt;
         }
     }
 }

@@ -15,13 +15,17 @@ namespace ParPolicyConsole
     {
         static void Main(string[] args)
         {
-            string Dropoff = ConfigurationManager.AppSettings["AnnualMailingFeed_Dropoff"];
-            string Staging = ConfigurationManager.AppSettings["AnnualMailingFeed_Staging"];
-            string Archive = ConfigurationManager.AppSettings["AnnualMailingFeed_Archive"];
-            string FeedName = ConfigurationManager.AppSettings["AnnualMailingFeed_Name"];
+            string Annual_Dropoff = ConfigurationManager.AppSettings["AnnualMailingFeed_Dropoff"];
+            string Annual_Staging = ConfigurationManager.AppSettings["AnnualMailingFeed_Staging"];
+            string Annual_Archive = ConfigurationManager.AppSettings["AnnualMailingFeed_Archive"];
+            string Annual_FeedName = ConfigurationManager.AppSettings["AnnualMailingFeed_Name"];
+
+            string Policy_Staging = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
 
             string TriggerPath = ConfigurationManager.AppSettings["TriggerPath"];
             string TriggerFile = ConfigurationManager.AppSettings["TriggerFile_AnnualMailingList"];
+
+            string TriggerFile_Policies = "Feeds.txt";
 
             if (args.Length == 2)
             {
@@ -80,32 +84,45 @@ namespace ParPolicyConsole
                 Tools tools = new Tools();
 
                 Console.WriteLine("Processing Upload-Policy...");
-                //tools.UploadPolicy();
+                string trigger_policies = Path.Combine(Policy_Staging, TriggerFile_Policies);
+                if (File.Exists(trigger_policies))
+                {
+                    tools.UploadPolicy();
+                }
+                else
+                {
+                    Console.WriteLine("No trigger file found for Policy processing\n" +
+                        trigger_policies);
+                }
 
                 Console.WriteLine("Processing Extract-Mailing-List");
                 //tools.ExtractMailingList();
 
                 Console.WriteLine("Processing Upload-Annual-Mailing-List");
-                tools.UploadAnnualMailingList();
+                string trigger_annual = Path.Combine(TriggerPath, TriggerFile);
+                if (File.Exists(trigger_annual))
+                    tools.UploadAnnualMailingList();
             }
+
+            Console.ReadKey();
 
             /* Crude temporary solution */
-            var waitTime = TimeSpan.FromSeconds(30);
+            //var waitTime = TimeSpan.FromSeconds(30);
 
-            while (true)
-            {
-                bool fileFound = false;
-                if (File.Exists(@"C:\temp\Feeds.txt"))
-                {
-                    Console.WriteLine("Feeds.txt found....");
-                    fileFound = true;
-                }
+            //while (true)
+            //{
+            //    bool fileFound = false;
+            //    if (File.Exists(@"C:\temp\Feeds.txt"))
+            //    {
+            //        Console.WriteLine("Feeds.txt found....");
+            //        fileFound = true;
+            //    }
 
-                if (fileFound == false)
-                    Console.WriteLine(DateTime.Now.ToShortTimeString() + " : No files found...");
+            //    if (fileFound == false)
+            //        Console.WriteLine(DateTime.Now.ToShortTimeString() + " : No files found...");
 
-                Thread.Sleep(waitTime);
-            }
+            //    Thread.Sleep(waitTime);
+            //}
         }
 
     }

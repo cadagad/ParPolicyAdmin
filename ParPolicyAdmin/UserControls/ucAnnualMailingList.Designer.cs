@@ -41,7 +41,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblRecordCount = new System.Windows.Forms.Label();
             this.btnReviewDeficient = new System.Windows.Forms.Button();
-            this.btnReviewDuplicates = new System.Windows.Forms.Button();
+            this.btnUpdateMailing = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
@@ -199,17 +199,18 @@
             this.btnReviewDeficient.Text = "Review Deficient";
             this.btnReviewDeficient.UseVisualStyleBackColor = false;
             // 
-            // btnReviewDuplicates
+            // btnUpdateMailing
             // 
-            this.btnReviewDuplicates.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnReviewDuplicates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReviewDuplicates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReviewDuplicates.Location = new System.Drawing.Point(363, 4);
-            this.btnReviewDuplicates.Name = "btnReviewDuplicates";
-            this.btnReviewDuplicates.Size = new System.Drawing.Size(135, 23);
-            this.btnReviewDuplicates.TabIndex = 24;
-            this.btnReviewDuplicates.Text = "Review Duplicates";
-            this.btnReviewDuplicates.UseVisualStyleBackColor = false;
+            this.btnUpdateMailing.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnUpdateMailing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateMailing.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateMailing.Location = new System.Drawing.Point(363, 4);
+            this.btnUpdateMailing.Name = "btnUpdateMailing";
+            this.btnUpdateMailing.Size = new System.Drawing.Size(135, 23);
+            this.btnUpdateMailing.TabIndex = 24;
+            this.btnUpdateMailing.Text = "Update Mailing";
+            this.btnUpdateMailing.UseVisualStyleBackColor = false;
+            this.btnUpdateMailing.Click += new System.EventHandler(this.btnUpdateMailing_Click);
             // 
             // btnAdd
             // 
@@ -275,7 +276,7 @@
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnReviewDeficient);
-            this.Controls.Add(this.btnReviewDuplicates);
+            this.Controls.Add(this.btnUpdateMailing);
             this.Controls.Add(this.lblRecordCount);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label3);
@@ -308,7 +309,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblRecordCount;
         private System.Windows.Forms.Button btnReviewDeficient;
-        private System.Windows.Forms.Button btnReviewDuplicates;
+        private System.Windows.Forms.Button btnUpdateMailing;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button BtnEdit;

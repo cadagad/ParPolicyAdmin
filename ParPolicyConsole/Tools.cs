@@ -45,13 +45,18 @@ namespace ParPolicyConsole
 
                     List<Policy> policies = policyRepo.PolicyFeed_ToList(feedId, staging_folder);
 
+                    Console.WriteLine(String.Format("Processing {0} records. Please wait.", policies.Count().ToString()));
+
                     int PAGE_SIZE = 5000;
                     List<List<Policy>> chunks = ListExtensions.SplitList(policies, PAGE_SIZE);
 
-                    // int iteration = 0;
+                    int iteration = 0;
                     foreach (List<Policy> p in chunks)
                     {
+                        Console.WriteLine(String.Format("Inserting to database : {0} of {1}",
+                            (PAGE_SIZE * iteration), policies.Count()));
                         policyRepo.BulkInsertPolicy(p);
+                        iteration++;
                     }
 
                     policyFeedRepo.SetFeedIsProcessed(feedId);

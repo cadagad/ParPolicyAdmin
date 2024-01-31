@@ -297,5 +297,40 @@ namespace ParPolicyAdmin.UserControls
             if (dr == DialogResult.Cancel)
                 return;
         }
+
+        private void btnUpdateMailing_Click(object sender, EventArgs e)
+        {
+            int recordCountForUpdate = AnnualMailingListRepo.UpdateMailingList_Count();
+
+            if (recordCountForUpdate == 0)
+            {
+                MessageBox.Show(
+                    String.Format("All records are up to date"),
+                    "Confirm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show(
+                String.Format("Are you sure you want to update all {0} records?\n " +
+                              "This might take a few minutes.", 
+                              recordCountForUpdate.ToString()),
+                "Confirm",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.Cancel)
+                return;
+
+            AnnualMailingListRepo.UpdateMailingList_FromPolicies();
+
+            MessageBox.Show(
+                    String.Format("Successfully updated all mailing records!"),
+                    "Confirm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+        }
     }
 }
