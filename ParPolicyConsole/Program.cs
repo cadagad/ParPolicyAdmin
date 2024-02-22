@@ -101,7 +101,10 @@ namespace ParPolicyConsole
                 Console.WriteLine("Processing Upload-Annual-Mailing-List");
                 string trigger_annual = Path.Combine(TriggerPath, TriggerFile);
                 if (File.Exists(trigger_annual))
+                {
                     tools.UploadAnnualMailingList();
+                    File.Delete(trigger_annual);
+                }
             }
 
             Console.ReadKey();

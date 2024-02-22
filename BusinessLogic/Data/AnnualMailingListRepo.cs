@@ -243,7 +243,7 @@ namespace BusinessLogic.Data
         {
             try
             {
-                string sql = String.Format("DELETE FROM dbo.AnnualMailingLists)");
+                string sql = String.Format("DELETE FROM dbo.AnnualMailingLists;");
                 _appDbContext.Database.ExecuteSqlCommand(sql);
             }
             catch (Exception ex)
@@ -271,6 +271,7 @@ namespace BusinessLogic.Data
         public void GenerateOutboundFeed(string path)
         {
             List<AnnualMailingList> aml = _appDbContext.AnnualMailingList
+                .AsNoTracking()
                 .Where(a => a.UserFlaggedDuplicate == false &&
                             a.UserFlaggedDeficient == false &&
                             a.UserFlaggedExclusion == false).ToList();
