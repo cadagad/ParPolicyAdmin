@@ -202,9 +202,9 @@ namespace ParPolicyAdmin.UserControls
             this.tbLabel3.Name = "tbLabel3";
             this.tbLabel3.Size = new System.Drawing.Size(360, 42);
             this.tbLabel3.TabIndex = 8;
-            this.tbLabel3.Text = "This button fetches any new barcode files from the CSTC server and then displays " +
-    "above. It does not load them into the database. To load them, hit the process Ba" +
-    "rcodes button.";
+            this.tbLabel3.Text = "This button fetches any new barcode files from the TSX Trust server and then disp" +
+    "lays above. It does not load them into the database. To load them, hit the proce" +
+    "ss Barcodes button.";
             // 
             // btnProcess
             // 

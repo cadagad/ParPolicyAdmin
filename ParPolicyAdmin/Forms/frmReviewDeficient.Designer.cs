@@ -152,6 +152,7 @@ namespace ParPolicyAdmin.Forms
             this.dgvPolicyList.Size = new System.Drawing.Size(1360, 531);
             this.dgvPolicyList.TabIndex = 100;
             this.dgvPolicyList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPolicyList_CellValueChanged);
+            this.dgvPolicyList.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPolicyList_ColumnHeaderMouseClick);
             // 
             // btnSave
             // 

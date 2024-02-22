@@ -41,7 +41,7 @@ namespace ParPolicyAdmin.Forms
             donePopulating = true;
         }
 
-        private void GridRefresh()
+        private void GridRefresh(string sortBy = null)
         {
             try
             {
@@ -52,12 +52,55 @@ namespace ParPolicyAdmin.Forms
                 int addr3 = Int32.Parse(tbAddr3.Value.ToString());
                 int addr4 = Int32.Parse(tbAddr4.Value.ToString());
                 int addr5 = Int32.Parse(tbAddr5.Value.ToString());
-                filtered = policies.Where(p => 
-                    (p.Address1.Length <= addr1) &&
-                    (p.Address2.Length <= addr2) &&
-                    (p.Address3.Length <= addr3) &&
-                    (p.Address4.Length <= addr4) &&
-                    (p.Address5.Length <= addr5)).ToList();
+                if (sortBy == "PolicyNumber")
+                {
+                    filtered = policies.Where(p =>
+                        (p.Address1.Length <= addr1) &&
+                        (p.Address2.Length <= addr2) &&
+                        (p.Address3.Length <= addr3) &&
+                        (p.Address4.Length <= addr4) &&
+                        (p.Address5.Length <= addr5))
+                        .OrderBy(p => p.PolicyNumber).ToList();
+                }
+                else if (sortBy == "HolderName")
+                {
+                    filtered = policies.Where(p =>
+                        (p.Address1.Length <= addr1) &&
+                        (p.Address2.Length <= addr2) &&
+                        (p.Address3.Length <= addr3) &&
+                        (p.Address4.Length <= addr4) &&
+                        (p.Address5.Length <= addr5))
+                        .OrderBy(p => p.HolderName).ToList();
+                }
+                else if (sortBy == "BirthDate")
+                {
+                    filtered = policies.Where(p =>
+                        (p.Address1.Length <= addr1) &&
+                        (p.Address2.Length <= addr2) &&
+                        (p.Address3.Length <= addr3) &&
+                        (p.Address4.Length <= addr4) &&
+                        (p.Address5.Length <= addr5))
+                        .OrderBy(p => p.BirthDate).ToList();
+                }
+                else if (sortBy == "Address1")
+                {
+                    filtered = policies.Where(p =>
+                        (p.Address1.Length <= addr1) &&
+                        (p.Address2.Length <= addr2) &&
+                        (p.Address3.Length <= addr3) &&
+                        (p.Address4.Length <= addr4) &&
+                        (p.Address5.Length <= addr5))
+                        .OrderBy(p => p.Address1).ToList();
+                }
+                else
+                {
+                    filtered = policies.Where(p =>
+                        (p.Address1.Length <= addr1) &&
+                        (p.Address2.Length <= addr2) &&
+                        (p.Address3.Length <= addr3) &&
+                        (p.Address4.Length <= addr4) &&
+                        (p.Address5.Length <= addr5)).ToList();
+                }
 
                 lblRecordCount.Text = "Record(s) : " + filtered.Count().ToString();
 
@@ -94,6 +137,11 @@ namespace ParPolicyAdmin.Forms
                     dgvPolicyList.Columns["UserFlaggedDeficient"].Width = 85;
 
                     dgvPolicyList.Columns["UserFlaggedDeficient"].HeaderText = "Deficient?";
+
+                    foreach (DataGridViewColumn column in dgvPolicyList.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.Automatic;
+                    }
                 }
             }
             catch(Exception ex)
@@ -189,6 +237,12 @@ namespace ParPolicyAdmin.Forms
             int policyId = Int32.Parse(dgvPolicyList.Rows[row].Cells["PolicyId"].Value.ToString());
             if (!idChanged.Contains(policyId))
                 idChanged.Add(policyId);
+        }
+
+        private void dgvPolicyList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string sortByString = dgvPolicyList.Columns[e.ColumnIndex].DataPropertyName;
+            GridRefresh(sortByString);
         }
     }
 }

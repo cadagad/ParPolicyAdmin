@@ -169,9 +169,9 @@ namespace ParPolicyAdmin.UserControls
             this.tbLabel1.Name = "tbLabel1";
             this.tbLabel1.Size = new System.Drawing.Size(358, 41);
             this.tbLabel1.TabIndex = 4;
-            this.tbLabel1.Text = "Select one or more sources to submit to CSTC  (hold down the CTRL key to select m" +
-    "ultiple sources).   Alternatively, you can click on “Select All” to submit all r" +
-    "ecords to CSTC";
+            this.tbLabel1.Text = "Select one or more sources to submit to TSX Trust  (hold down the CTRL key to sel" +
+    "ect multiple sources).   Alternatively, you can click on “Select All” to submit " +
+    "all records to TSX Trust";
             // 
             // ucSubmit
             // 

@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="tbLabel2.Text" xml:space="preserve">
-    <value>Clicking this button will launch the upload of data to the CSTC for mailing.  A separate file of summary information is sent to the CSTC for verification that all data arrived.  If it has not, they may contact you and request a resend.  If so, run this process again.</value>
+    <value>Clicking this button will launch the upload of data to the TSX Trust for mailing.  A separate file of summary information is sent to the TSX Trust for verification that all data arrived.  If it has not, they may contact you and request a resend.  If so, run this process again.</value>
   </data>
 </root>

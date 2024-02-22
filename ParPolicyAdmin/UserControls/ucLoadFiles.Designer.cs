@@ -35,16 +35,10 @@ namespace ParPolicyAdmin.UserControls
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDescription = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbLabel4 = new System.Windows.Forms.TextBox();
             this.tbLabel2 = new System.Windows.Forms.TextBox();
             this.tbLabel1 = new System.Windows.Forms.TextBox();
-            this.tbLabel3 = new System.Windows.Forms.TextBox();
             this.dgvFeeds = new System.Windows.Forms.DataGridView();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -57,67 +51,14 @@ namespace ParPolicyAdmin.UserControls
             // 
             // pnlDescription
             // 
-            this.pnlDescription.Controls.Add(this.label5);
-            this.pnlDescription.Controls.Add(this.textBox1);
-            this.pnlDescription.Controls.Add(this.label4);
-            this.pnlDescription.Controls.Add(this.label3);
             this.pnlDescription.Controls.Add(this.label2);
             this.pnlDescription.Controls.Add(this.label1);
-            this.pnlDescription.Controls.Add(this.tbLabel4);
             this.pnlDescription.Controls.Add(this.tbLabel2);
             this.pnlDescription.Controls.Add(this.tbLabel1);
-            this.pnlDescription.Controls.Add(this.tbLabel3);
             this.pnlDescription.Location = new System.Drawing.Point(515, 12);
             this.pnlDescription.Name = "pnlDescription";
             this.pnlDescription.Size = new System.Drawing.Size(369, 406);
             this.pnlDescription.TabIndex = 8;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label5.Location = new System.Drawing.Point(3, 273);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Progress Bars:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(6, 289);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(360, 31);
-            this.textBox1.TabIndex = 12;
-            this.textBox1.Text = "The progress bar displays the overall progress of the entire operation.";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label4.Location = new System.Drawing.Point(3, 216);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Activities:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label3.Location = new System.Drawing.Point(3, 146);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Cancel";
             // 
             // label2
             // 
@@ -140,21 +81,6 @@ namespace ParPolicyAdmin.UserControls
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Refresh";
-            // 
-            // tbLabel4
-            // 
-            this.tbLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLabel4.BackColor = System.Drawing.SystemColors.Control;
-            this.tbLabel4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbLabel4.Enabled = false;
-            this.tbLabel4.Location = new System.Drawing.Point(6, 234);
-            this.tbLabel4.Multiline = true;
-            this.tbLabel4.Name = "tbLabel4";
-            this.tbLabel4.Size = new System.Drawing.Size(360, 31);
-            this.tbLabel4.TabIndex = 10;
-            this.tbLabel4.Text = "A log of the processes is displayed here.  The information can be copied by right" +
-    " clicking on the box and selecting copy.";
             // 
             // tbLabel2
             // 
@@ -184,22 +110,6 @@ namespace ParPolicyAdmin.UserControls
             this.tbLabel1.TabIndex = 4;
             this.tbLabel1.Text = "The Refresh button repopulates the window above to display any newly arrived Sour" +
     "ce files to be processed.";
-            // 
-            // tbLabel3
-            // 
-            this.tbLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLabel3.BackColor = System.Drawing.SystemColors.Control;
-            this.tbLabel3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbLabel3.Enabled = false;
-            this.tbLabel3.Location = new System.Drawing.Point(6, 164);
-            this.tbLabel3.Multiline = true;
-            this.tbLabel3.Name = "tbLabel3";
-            this.tbLabel3.Size = new System.Drawing.Size(360, 42);
-            this.tbLabel3.TabIndex = 8;
-            this.tbLabel3.Text = "Cancelling the load will not only stop the processes from proceeding, it will als" +
-    "o roll back any information that was already loaded to the database.  Cancelled " +
-    "loads can be rerun at a later time.";
             // 
             // dgvFeeds
             // 
@@ -318,16 +228,10 @@ namespace ParPolicyAdmin.UserControls
         #endregion
 
         private System.Windows.Forms.Panel pnlDescription;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbLabel4;
         private System.Windows.Forms.TextBox tbLabel2;
         private System.Windows.Forms.TextBox tbLabel1;
-        private System.Windows.Forms.TextBox tbLabel3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dgvFeeds;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnRefresh;

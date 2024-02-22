@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="tbLabel1.Text" xml:space="preserve">
-    <value>Weeks and months after a mailing has been processed by the CSTC, the information is returned by recepients. These are called Barcodes and some (though not all) of their information is made available on CSTC's servers. As this data is retrieved in this step, the summary information is gathered and displayed here.</value>
+    <value>Weeks and months after a mailing has been processed by the TSX Trust, the information is returned by recepients. These are called Barcodes and some (though not all) of their information is made available on TSX Trust servers. As this data is retrieved in this step, the summary information is gathered and displayed here.</value>
   </data>
 </root>
