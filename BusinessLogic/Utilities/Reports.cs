@@ -24,13 +24,12 @@ namespace BusinessLogic.Utilities
 
 
 
-        public void GenerateCstcFeed(List<string> codes)
+        public void GenerateCstcFeed(List<string> codes, string folder)
         {
             List<Policy> policies = policyRepo.GetPolicies_BySourceCode(codes);
 
             string fn = ConfigurationManager.AppSettings["CstcFeed"];
-            string outputFolder = ConfigurationManager.AppSettings["Output_Staging"];
-            string path = Path.Combine(outputFolder, fn);
+            string path = Path.Combine(folder, fn);
 
             /* Delete if exist */
             if (File.Exists(path))

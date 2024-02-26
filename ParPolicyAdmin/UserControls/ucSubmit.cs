@@ -40,34 +40,37 @@ namespace ParPolicyAdmin.UserControls
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            string str = String.Empty;
+            string folder = String.Empty;
+            string fn = ConfigurationManager.AppSettings["CstcFeed"];
+
+            /* User selects folder to save */
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                    folder = fbd.SelectedPath;
+                else
+                    return;
+            }
+
+            /* Delete if exist */
+            if (!Directory.Exists(folder))
+                return;
+
+            List<string> codes = new List<string>();
             foreach (DataGridViewRow r in dgvSources.SelectedRows)
             {
-                str = str + r.Cells["Code"].Value.ToString() + "\n";
+                codes.Add(r.Cells["Code"].Value.ToString());
             }
 
-            try
-            {
-                if (!String.IsNullOrEmpty(str))
-                {
-                    DateTime startTime = DateTime.Now;
+            Reports report = new Reports();
+            report.GenerateCstcFeed(codes, folder);
 
-                    string fn = Staging + "\\MailingCodes.txt";
-
-                    /* Delete if exist */
-                    if (File.Exists(fn))
-                        File.Delete(fn);
-
-                    File.AppendAllText(fn, str);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                    "Error",
+            MessageBox.Show(String.Format("Vendor feed successfully generated. Please check:\n {0}", folder + "\\" + fn),
+                    "Success!",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+                    MessageBoxIcon.Information);
         }
 
         private void ucSubmit_Load(object sender, EventArgs e)
@@ -93,7 +96,56 @@ namespace ParPolicyAdmin.UserControls
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            string feedName = ConfigurationManager.AppSettings["CstcFeed"];
+            string MftFolder = ConfigurationManager.AppSettings["MFT_Dropoff"];
 
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Search for " + feedName;
+            openFileDialog.DefaultExt = "txt";
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.Multiselect = false;
+
+            string srcFile = String.Empty;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                srcFile = openFileDialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+
+            try
+            {
+                string check = Path.GetFullPath(MftFolder);
+
+                if (!Directory.Exists(MftFolder))
+                    Directory.CreateDirectory(MftFolder);
+
+                string mftFile = String.Empty;
+                if (MftFolder.EndsWith("\\"))
+                {
+                    mftFile = MftFolder + feedName;
+                }
+                else
+                {
+                    mftFile = MftFolder + "\\" + feedName;
+                }
+
+                File.Copy(srcFile, mftFile, true);
+
+                MessageBox.Show(String.Format("File successfully uploaded to MFT. " +
+                    "\nPlease wait for email confirmation" +
+                    "\nSource : {0}" +
+                    "\nDestination : {1}",
+                    srcFile,
+                    mftFile));
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show("Invalid configuration path for MFT_Dropoff : " + MftFolder);
+            }
         }
     }
 }

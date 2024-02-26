@@ -76,21 +76,21 @@ namespace ParPolicyConsole
 
         public bool ExtractMailingList()
         {
-            string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
-            string path = staging_folder + "\\" + "MailingCodes.txt";
-            if (!File.Exists(path))
-            {
-                Console.WriteLine("Error : MailingCodes.txt is expected on " + staging_folder);
-                return false;
-            }
+            //string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
+            //string path = staging_folder + "\\" + "MailingCodes.txt";
+            //if (!File.Exists(path))
+            //{
+            //    Console.WriteLine("Error : MailingCodes.txt is expected on " + staging_folder);
+            //    return false;
+            //}
 
-            string[] mailingCodes = File.ReadAllLines(path);
-            List<string> codes = mailingCodes.ToList();
+            //string[] mailingCodes = File.ReadAllLines(path);
+            //List<string> codes = mailingCodes.ToList();
 
-            Reports report = new Reports();
-            report.GenerateCstcFeed(codes);
+            //Reports report = new Reports();
+            //report.GenerateCstcFeed(codes);
 
-            File.Delete(path);
+            //File.Delete(path);
 
             return true;
         }
