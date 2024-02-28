@@ -45,7 +45,76 @@ namespace BusinessLogic.Data
         {
             _appDbContext.Barcodes.AddRange(barcodes);
             _appDbContext.SaveChanges();
-        }            
+        }
+
+        public List<VwBarcodeMailing> Process_AllRecords_ToList(string file)
+        {
+            if (!File.Exists(file))
+                throw new Exception(String.Format("Error : File {0} does not exist", file));
+
+            /* Check if correct file */
+            if (Path.GetFileName(file).ToUpper() != "ALL_RECORDS.TXT")
+                throw new Exception(String.Format("Error : Invalid File : {0}", file));
+
+            List<VwBarcodeMailing> annualMailings = new List<VwBarcodeMailing>();
+            string[] lines = File.ReadAllLines(file);
+            int ln = 0;
+            int invalidLineCount = 0;
+
+            foreach (string line in lines)
+            {
+                ln++;
+                VwBarcodeMailing bm = new VwBarcodeMailing();
+
+                /* Check if line length is valid */
+                if (line.Length < _COM.BCODE_LEN_MINLINE)
+                {
+                    invalidLineCount++;
+                    continue;
+                }
+
+                /* if first 3 lines does not meet length criteria - consider an invalid file */
+                if (ln == 3 && invalidLineCount == 3)
+                {
+                    throw new Exception(String.Format("Error : Invalid file format : {0}", file));
+                }
+
+                /* Check if Policy Number is valid */
+                string policyNum = line.Substring(_COM.START_POS_ANNUAL_POLICYNUM, _COM.LEN_POLICYNUM).Trim();
+                if (String.IsNullOrEmpty(policyNum))
+                    continue;
+
+                /* Check if Barcode Number is valid */
+                string barcodeNum = line.Substring(_COM.BCODE_START_POS_BARCODENUM, _COM.BCODE_LEN_BARCODENUM).Trim();
+                if (String.IsNullOrEmpty(barcodeNum))
+                    continue;
+
+                /* Pad zero to policyNum */
+                policyNum = policyNum.PadLeft(_COM.LEN_POLICYNUM, '0');
+
+                /* Pad zero to policyNum */
+                barcodeNum = barcodeNum.PadLeft(_COM.BCODE_LEN_BARCODENUM, '0');
+
+                bm.SystemCode = line.Substring(_COM.START_POS_ANNUAL_SYSCODE, _COM.LEN_SYSCODE).Trim();
+                bm.PolicyNumber = policyNum;
+                bm.PostalCode = line.Substring(_COM.START_POS_ANNUAL_POSTAL, _COM.LEN_POSTAL).Trim();
+                bm.CountryCode = line.Substring(_COM.START_POS_ANNUAL_COUNTRY, _COM.LEN_COUNTRY).Trim();
+                bm.LanguageCode = line.Substring(_COM.START_POS_ANNUAL_LANGUAGE, _COM.LEN_LANGUAGE).Trim();
+                bm.HolderName = line.Substring(_COM.START_POS_ANNUAL_HOLDERNAME, _COM.LEN_HOLDERNAME).Trim();
+                bm.Address1 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_1, _COM.LEN_ADDRESS).Trim();
+                bm.Address2 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_2, _COM.LEN_ADDRESS).Trim();
+                bm.Address3 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_3, _COM.LEN_ADDRESS).Trim();
+                bm.Address4 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_4, _COM.LEN_ADDRESS).Trim();
+                bm.Address5 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_5, _COM.LEN_ADDRESS).Trim();
+                bm.Address6 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_6, _COM.LEN_ADDRESS).Trim();
+                bm.KeyName = line.Substring(_COM.START_POS_ANNUAL_KEYNAME, _COM.LEN_KEYNAME).Trim();
+                bm.BarcodeNumber = barcodeNum;
+
+                annualMailings.Add(bm);
+            }
+
+            return annualMailings;
+        }
 
         public List<Barcode> Process_AllRecords_ToList(int barcodeFeedId, string stagingPath)
         {
@@ -110,7 +179,7 @@ namespace BusinessLogic.Data
                     /* Pad zero to policyNum */
                     policyNum = policyNum.PadLeft(_COM.BCODE_LEN_POLICYNUM, '0');
 
-                    /* Pad zero to policyNum */
+                    /* Pad zero to barcode */
                     barcodeNum = barcodeNum.PadLeft(_COM.BCODE_LEN_BARCODENUM, '0');
 
                     barcode.BarcodeFeedId = barcodeFeedId;

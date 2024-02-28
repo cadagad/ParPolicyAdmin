@@ -122,6 +122,7 @@
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\VwBarcodeMailing.cs" />
     <Compile Include="Models\VwBarcodePolicy.cs" />
     <Compile Include="Models\VwPolicySummary.cs" />
     <Compile Include="Models\VwSourceSummaryByProject.cs" />

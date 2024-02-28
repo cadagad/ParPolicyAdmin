@@ -85,6 +85,7 @@ namespace ParPolicyAdmin
             this.btnLateReturns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLateReturns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLateReturns.UseVisualStyleBackColor = true;
+            this.btnLateReturns.Visible = false;
             this.btnLateReturns.Click += new System.EventHandler(this.btnLateReturns_Click);
             // 
             // btnAnnualMailingList
