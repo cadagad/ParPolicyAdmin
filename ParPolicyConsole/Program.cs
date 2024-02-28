@@ -49,9 +49,9 @@ namespace ParPolicyConsole
             }
             else if (args.Length > 0 && args[0].ToLower() == "upload-barcodes")
             {
-                Console.WriteLine("Processing Upload-Barcodes");
-                Tools tools = new Tools();
-                tools.UploadBarcodes();
+                // Console.WriteLine("Processing Upload-Barcodes");
+                // Tools tools = new Tools();
+                // tools.UploadBarcodes();
             }
             else if (args.Length > 0 && args[0].ToLower() == "upload-annual-mailing-list")
             {

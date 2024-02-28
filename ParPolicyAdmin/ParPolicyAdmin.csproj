@@ -128,6 +128,12 @@
     <Compile Include="UserControls\ucBarcodes.Designer.cs">
       <DependentUpon>ucBarcodes.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucImprovedBarcodes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucImprovedBarcodes.Designer.cs">
+      <DependentUpon>ucImprovedBarcodes.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucLateReturns.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucBarcodes.resx">
       <DependentUpon>ucBarcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucImprovedBarcodes.resx">
+      <DependentUpon>ucImprovedBarcodes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucLateReturns.resx">
       <DependentUpon>ucLateReturns.cs</DependentUpon>

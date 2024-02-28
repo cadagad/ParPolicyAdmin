@@ -121,7 +121,7 @@ namespace ParPolicyAdmin
             if (currentUserControl != null)
                 this.panelBody.Controls.Clear();
 
-            currentUserControl = new ucBarcodes(CurrentProject.ProjectId);
+            currentUserControl = new ucImprovedBarcodes(CurrentProject.ProjectId);
 
             currentUserControl.Dock = DockStyle.Fill;
             this.panelBody.Controls.Add(currentUserControl);
