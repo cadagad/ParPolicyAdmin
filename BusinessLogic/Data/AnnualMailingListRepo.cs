@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Models;
 using BusinessLogic.Utilities;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -345,5 +346,17 @@ namespace BusinessLogic.Data
 
             return cnt;
         }
+
+        /* This will return policy numbers that are already in Annual Mailing */
+        public List<string> FindDuplicateMailing(List<string> policyNumbers)
+        {
+            List<string> distinctPolicies = new List<string>();
+
+            distinctPolicies = _appDbContext.AnnualMailingList
+                .Where(m => policyNumbers.Contains(m.PolicyNumber))
+                .Select(m => m.PolicyNumber)
+                .ToList();
+
+            return distinctPolicies;        }
     }
 }

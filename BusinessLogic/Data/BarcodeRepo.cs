@@ -109,6 +109,7 @@ namespace BusinessLogic.Data
                 bm.Address6 = line.Substring(_COM.START_POS_ANNUAL_ADDRESS_6, _COM.LEN_ADDRESS).Trim();
                 bm.KeyName = line.Substring(_COM.START_POS_ANNUAL_KEYNAME, _COM.LEN_KEYNAME).Trim();
                 bm.BarcodeNumber = barcodeNum;
+                bm.AddFlag = false;
 
                 annualMailings.Add(bm);
             }

@@ -50,5 +50,7 @@ namespace BusinessLogic.Models
 
         [MaxLength(7)]
         public string BarcodeNumber { get; set; }
+
+        public bool AddFlag { get; set; }
     }
 }
