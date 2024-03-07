@@ -174,7 +174,7 @@ namespace BusinessLogic.Data
             _appDbContext.SaveChanges();
         }
 
-        public void SetFeedIsRunning(int policyFeedId)
+        public void SetFeedIsRequesting(int policyFeedId)
         {
             PolicyFeed pf = _appDbContext.PolicyFeeds.Where(p => p.PolicyFeedId == policyFeedId).FirstOrDefault();
             pf.Status = "Requesting";

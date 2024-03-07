@@ -137,11 +137,26 @@ namespace ParPolicyAdmin.UserControls
                 barcodesToSearch.Add(line.Trim());
             }
 
-            
+            /* Get searched item without match */
+            IEnumerable<string> notOnList = barcodesToSearch.Where(b => !barcodeMailings.Select(m => m.BarcodeNumber).ToList().Contains(b));
+            string notFoundMsg = "No barcode match for the ff:\n";
+            foreach (string s in notOnList)
+            {
+                notFoundMsg = notFoundMsg + s + "\n";
+            }
+
             if (barcodeMailings.Count() > 0)
             {
                 SubList = barcodeMailings.Where(bm => barcodesToSearch.Contains(bm.BarcodeNumber)).ToList();
                 GridRefresh();
+            }
+
+            if (notOnList.Any())
+            {
+                MessageBox.Show(notFoundMsg,
+                            "Information",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
             }
         }
 

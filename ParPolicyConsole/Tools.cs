@@ -23,14 +23,26 @@ namespace ParPolicyConsole
             PolicyFeedRepo policyFeedRepo = new PolicyFeedRepo();
             PolicyRepo policyRepo = new PolicyRepo();
 
-            string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
-            string path = staging_folder + "\\" + "Feeds.txt";
+            string TriggerPath = ConfigurationManager.AppSettings["TriggerPath"];
+            string TriggerFile = ConfigurationManager.AppSettings["TriggerFile_LoadFiles"];
+
+            string path = String.Empty;
+            if (TriggerPath.EndsWith("\\"))
+            {
+                path = TriggerPath + TriggerFile;
+            }
+            else
+            {
+                path = TriggerPath + "\\" + TriggerFile;
+            }
+
             if (!File.Exists(path))
             {
-                Console.WriteLine("Error : Feeds.txt is expected on " + staging_folder);
+                Console.WriteLine("Error : Feeds.txt is expected on " + TriggerPath);
                 return false;
             }
 
+            string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
             string[] feedIds = File.ReadAllLines(path);
 
             try
@@ -39,9 +51,12 @@ namespace ParPolicyConsole
 
                 foreach (string feed in feedIds)
                 {
-                    int feedId = 0;
-                    if (!Int32.TryParse(feed, out feedId))
+                    int feedId = policyRepo.GetFeedId_ByFeedNameInActiveProject(feed);
+                    if (feedId == -1)
+                    {
+                        Console.WriteLine(String.Format("Feed ID for requested file does not exist : {0}", feed));
                         continue;
+                    }
 
                     List<Policy> policies = policyRepo.PolicyFeed_ToList(feedId, staging_folder);
 

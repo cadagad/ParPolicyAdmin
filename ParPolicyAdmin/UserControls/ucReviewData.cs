@@ -49,8 +49,10 @@ namespace ParPolicyAdmin.UserControls
 
             if (source.Count > 0)
             {
-                dgvSources.Columns["Code"].Width = 210;
-                dgvSources.Columns["Records"].Width = 75;
+                dgvSources.Columns["Records"].Visible = false;
+                dgvSources.Columns["Code"].Width = 150;
+                dgvSources.Columns["Code"].HeaderText = "Source";
+                //dgvSources.Columns["Records"].Width = 75;
             }
         }
 

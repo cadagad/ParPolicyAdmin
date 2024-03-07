@@ -194,6 +194,22 @@ namespace BusinessLogic.Data
             return true;
         }
 
+        public int GetFeedId_ByFeedNameInActiveProject(string feedName)
+        {
+            /* Default of -1 is error */
+            int ret = -1;
+
+            PolicyFeed policyFeed = _appDbContext.PolicyFeeds
+                .Where(pf => pf.FileName == feedName && pf.IsValid == true && pf.Project.IsActive == true)
+                .FirstOrDefault();
+
+            if (policyFeed == null)
+                return ret;
+
+            ret = policyFeed.PolicyFeedId;
+            return ret;
+        }
+
         public List<Policy> PolicyFeed_ToList(int policyFeedId, string stagingPath)
         {
 

@@ -24,6 +24,7 @@ namespace ParPolicyConsole
 
             string TriggerPath = ConfigurationManager.AppSettings["TriggerPath"];
             string TriggerFile = ConfigurationManager.AppSettings["TriggerFile_AnnualMailingList"];
+            string TriggerFile_LoadFiles = ConfigurationManager.AppSettings["TriggerFile_LoadFiles"];
 
             string TriggerFile_Policies = "Feeds.txt";
 
@@ -44,8 +45,17 @@ namespace ParPolicyConsole
             if (args.Length > 0 && args[0].ToLower() == "upload-policy")
             {
                 Console.WriteLine("Processing Upload-Policy...");
+                string trigger_policies = Path.Combine(TriggerPath, TriggerFile_LoadFiles);
                 Tools tools = new Tools();
-                tools.UploadPolicy();
+                if (File.Exists(trigger_policies))
+                {
+                    tools.UploadPolicy();
+                }
+                else
+                {
+                    Console.WriteLine("No trigger file found for Policy processing\n" +
+                        trigger_policies);
+                }
             }
             else if (args.Length > 0 && args[0].ToLower() == "upload-barcodes")
             {
@@ -78,7 +88,7 @@ namespace ParPolicyConsole
                 Tools tools = new Tools();
 
                 Console.WriteLine("Processing Upload-Policy...");
-                string trigger_policies = Path.Combine(Policy_Staging, TriggerFile_Policies);
+                string trigger_policies = Path.Combine(TriggerPath, TriggerFile_LoadFiles);
                 if (File.Exists(trigger_policies))
                 {
                     tools.UploadPolicy();

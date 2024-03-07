@@ -27,6 +27,8 @@ namespace ParPolicyAdmin.UserControls
         private string Dropoff = String.Empty;
         private string Staging = String.Empty;
         private string Archive = String.Empty;
+        private string TriggerPath = String.Empty;
+        private string TriggerFile = String.Empty;
 
         public ucLoadFiles(int projectId)
         {
@@ -39,6 +41,8 @@ namespace ParPolicyAdmin.UserControls
             Dropoff = ConfigurationManager.AppSettings["PolicyFeed_Dropoff"];
             Staging = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
             Archive = ConfigurationManager.AppSettings["PolicyFeed_Archive"];
+            TriggerPath = ConfigurationManager.AppSettings["TriggerPath"];
+            TriggerFile = ConfigurationManager.AppSettings["TriggerFile_LoadFiles"];
         }
 
         private void ucLoadFiles_Load(object sender, EventArgs e)
@@ -81,6 +85,18 @@ namespace ParPolicyAdmin.UserControls
                 return;
             }
 
+            PolicyFeeds = policyFeedRepo.GetPolicyFeeds_ByProjectId(_activeProjectId);
+            int activeStatusCount = PolicyFeeds.Where(pf => pf.Status != "Not processed" && pf.Status != "Complete").Count();
+            if (activeStatusCount > 0)
+            {
+                MessageBox.Show("Please wait for the current process to complete.\n" +
+                    "For assistance, please contact IT support.",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Cursor.Current = Cursors.WaitCursor;
             tmrRefresh.Enabled = true;
 
@@ -88,7 +104,15 @@ namespace ParPolicyAdmin.UserControls
             {
                 DateTime startTime = DateTime.Now;
 
-                string fn = Staging + "\\Feeds.txt";
+                string fn = String.Empty;
+                if (TriggerPath.EndsWith("\\"))
+                {
+                    fn = TriggerPath + TriggerFile;
+                }
+                else
+                {
+                    fn = TriggerPath + "\\" + TriggerFile;
+                }
 
                 /* Delete if exist */
                 if (File.Exists(fn))
@@ -97,9 +121,10 @@ namespace ParPolicyAdmin.UserControls
                 foreach (DataGridViewRow r in dgvFeeds.SelectedRows)
                 {
                     int feedId = (int)r.Cells["PolicyFeedId"].Value;
-                    policyFeedRepo.SetFeedIsRunning(feedId);
+                    policyFeedRepo.SetFeedIsRequesting(feedId);
 
-                    File.AppendAllText(fn, (feedId.ToString() + "\n"));
+                    string feedName = r.Cells["FileName"].Value.ToString();
+                    File.AppendAllText(fn, (feedName + "\n"));
                 }
             }
             catch (Exception ex)

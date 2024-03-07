@@ -101,6 +101,13 @@ namespace BusinessLogic.Models
             string votes = "000000000010000";
             string filler6 = "0000000000000000000000000000000000000000000000000000000000000000000000000000";
 
+            string add1 = Address1.Replace("\0", "");
+            string add2 = Address2.Replace("\0", "");
+            string add3 = Address3.Replace("\0", "");
+            string add4 = Address4.Replace("\0", "");
+            string add5 = Address5.Replace("\0", "");
+            string add6 = Address6.Replace("\0", "");
+
             return String.Format(
                 "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}" +
                 "{10}{11}{12}{13}{14}{15}{16}{17}{18}{19}" +
@@ -119,12 +126,12 @@ namespace BusinessLogic.Models
                 this.LanguageCode != null ? this.LanguageCode.PadRight(1) : String.Empty.PadRight(1),
                 filler5,
                 this.HolderName != null ? this.HolderName.PadRight(34) : String.Empty.PadRight(34),
-                this.Address1 != null ? this.Address1.PadRight(34) : String.Empty.PadRight(34),
-                this.Address2 != null ? this.Address2.PadRight(34) : String.Empty.PadRight(34),
-                this.Address3 != null ? this.Address3.PadRight(34) : String.Empty.PadRight(34),
-                this.Address4 != null ? this.Address4.PadRight(34) : String.Empty.PadRight(34),
-                this.Address5 != null ? this.Address5.PadRight(34) : String.Empty.PadRight(34),
-                this.Address6 != null ? this.Address6.PadRight(34) : String.Empty.PadRight(34),
+                add1 != null ? add1.PadRight(34) : String.Empty.PadRight(34),
+                add2 != null ? add2.PadRight(34) : String.Empty.PadRight(34),
+                add3 != null ? add3.PadRight(34) : String.Empty.PadRight(34),
+                add4 != null ? add4.PadRight(34) : String.Empty.PadRight(34),
+                add5 != null ? add5.PadRight(34) : String.Empty.PadRight(34),
+                add6 != null ? add6.PadRight(34) : String.Empty.PadRight(34),
                 votes,
                 filler6,
                 this.HolderName != null ? this.HolderName.PadRight(32) : String.Empty.PadRight(32));

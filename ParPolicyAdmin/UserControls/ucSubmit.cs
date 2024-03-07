@@ -89,8 +89,10 @@ namespace ParPolicyAdmin.UserControls
 
             if (source.Count > 0)
             {
-                dgvSources.Columns["Code"].Width = 210;
-                dgvSources.Columns["Records"].Width = 75;
+                dgvSources.Columns["Records"].Visible = false;
+                dgvSources.Columns["Code"].Width = 150;
+                dgvSources.Columns["Code"].HeaderText = "Source";
+                //dgvSources.Columns["Records"].Width = 75;
             }
         }
 
@@ -136,11 +138,10 @@ namespace ParPolicyAdmin.UserControls
                 File.Copy(srcFile, mftFile, true);
 
                 MessageBox.Show(String.Format("File successfully uploaded to MFT. " +
-                    "\nPlease wait for email confirmation" +
-                    "\nSource : {0}" +
-                    "\nDestination : {1}",
-                    srcFile,
-                    mftFile));
+                    "\nPlease wait for email confirmation."),
+                    "Success!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             catch(Exception ex) 
             {
