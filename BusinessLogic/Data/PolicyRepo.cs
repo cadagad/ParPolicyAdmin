@@ -519,7 +519,7 @@ namespace BusinessLogic.Data
 
             /* Other count default to zero */
             report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = "OTHER COUNT:", Description = "0" });
-            report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = "TOTAL COUNT::", Description = totalCount.ToString() });
+            report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = "TOTAL COUNT:", Description = totalCount.ToString() });
 
             return report;
         }

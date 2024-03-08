@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Data;
 using BusinessLogic.Models;
 using BusinessLogic.Utilities;
+using ParPolicyAdmin.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -154,16 +155,11 @@ namespace ParPolicyAdmin.UserControls
 
         private void btnSourceReport_Click(object sender, EventArgs e)
         {
-            PolicyRepo policyRepo = new PolicyRepo();
-
-            try
-            {
-                List<VwPolicyCount> report = policyRepo.GetPolicyReport_ActiveProject();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            frmPolicyCountReport frm = new frmPolicyCountReport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+            frm.Close();
+            frm.Dispose();
         }
     }
 }
