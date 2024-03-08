@@ -42,6 +42,7 @@ namespace ParPolicyAdmin.UserControls
         {
             string folder = String.Empty;
             string fn = ConfigurationManager.AppSettings["CstcFeed"];
+            Cursor.Current = Cursors.WaitCursor;
 
             /* User selects folder to save */
             using (var fbd = new FolderBrowserDialog())
@@ -66,6 +67,8 @@ namespace ParPolicyAdmin.UserControls
 
             Reports report = new Reports();
             report.GenerateCstcFeed(codes, folder);
+
+            Cursor.Current = Cursors.Default;
 
             MessageBox.Show(String.Format("Vendor feed successfully generated. Please check:\n {0}", folder + "\\" + fn),
                     "Success!",
@@ -146,6 +149,20 @@ namespace ParPolicyAdmin.UserControls
             catch(Exception ex) 
             {
                 MessageBox.Show("Invalid configuration path for MFT_Dropoff : " + MftFolder);
+            }
+        }
+
+        private void btnSourceReport_Click(object sender, EventArgs e)
+        {
+            PolicyRepo policyRepo = new PolicyRepo();
+
+            try
+            {
+                List<VwPolicyCount> report = policyRepo.GetPolicyReport_ActiveProject();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

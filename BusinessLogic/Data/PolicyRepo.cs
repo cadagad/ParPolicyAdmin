@@ -10,6 +10,9 @@ using System.IO;
 using System.Globalization;
 
 using System.Data.Entity;
+using System.Text.RegularExpressions;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Excel;
 
 namespace BusinessLogic.Data
 {
@@ -25,7 +28,7 @@ namespace BusinessLogic.Data
             _appDbContext = new AppDbContext();
             sourceList = _appDbContext.Sources.Select(s => s.Code).ToList();
         }
-        
+
         public List<Policy> GetPolicies_ByProjectId(int projectId)
         {
             List<Policy> policyList = _appDbContext.Policy
@@ -37,8 +40,8 @@ namespace BusinessLogic.Data
         public List<Policy> GetPolicies_BySourceCode(List<string> sourceCode)
         {
             List<Policy> policyList = _appDbContext.Policy
-                .Where(p => sourceCode.Contains(p.SystemCode) && 
-                       p.UserFlaggedDuplicate == false && 
+                .Where(p => sourceCode.Contains(p.SystemCode) &&
+                       p.UserFlaggedDuplicate == false &&
                        p.UserFlaggedDeficient == false &&
                        p.UserFlaggedExclusion == false &&
                        p.ExactDuplicate == false &&
@@ -94,8 +97,8 @@ namespace BusinessLogic.Data
                 throw new Exception("Error : Source invalid format : " + sourceCode);
 
             List<int?> duplicateList = _appDbContext.Policy
-                .Where(p => p.PossibleDuplicate == true && 
-                       p.SystemCode == sourceCode && 
+                .Where(p => p.PossibleDuplicate == true &&
+                       p.SystemCode == sourceCode &&
                        p.PolicyHolderId != null &&
                        p.ExactDuplicate == false &&
                        p.PolicyFeed.Project.IsActive == true)
@@ -150,7 +153,7 @@ namespace BusinessLogic.Data
             foreach (var c in changes)
             {
                 Policy result = _appDbContext.Policy.SingleOrDefault(p => p.PolicyId == c.PolicyId);
-                if (result != null && 
+                if (result != null &&
                     result.UserFlaggedDuplicate != c.UserFlaggedDuplicate)
                 {
                     result.UserFlaggedDuplicate = c.UserFlaggedDuplicate;
@@ -184,7 +187,7 @@ namespace BusinessLogic.Data
             try
             {
                 string sql = String.Format("DELETE FROM dbo.Policies where PolicyFeedId = {0}", policyFeedId.ToString());
-                _appDbContext.Database.ExecuteSqlCommand(sql) ;
+                _appDbContext.Database.ExecuteSqlCommand(sql);
             }
             catch (Exception ex)
             {
@@ -336,7 +339,7 @@ namespace BusinessLogic.Data
             {
                 /* If not equal to previous record - assign new ID */
                 if (previous_policy == null ||
-                    p.HolderName != previous_policy.HolderName || 
+                    p.HolderName != previous_policy.HolderName ||
                     p.BirthDate != previous_policy.BirthDate)
                 {
                     int holderId = ((fileId) + (++cntId));
@@ -351,7 +354,7 @@ namespace BusinessLogic.Data
                     p.PolicyHolderId = previous_policy.PolicyHolderId;
 
                     string prev_addr = String.Concat(
-                            previous_policy.Address1, 
+                            previous_policy.Address1,
                             previous_policy.Address2,
                             previous_policy.Address3,
                             previous_policy.Address4,
@@ -363,7 +366,7 @@ namespace BusinessLogic.Data
                         Replace("#", "").
                         Replace("-", "");
                     string curr_addr = String.Concat(
-                            p.Address1, 
+                            p.Address1,
                             p.Address2,
                             p.Address3,
                             p.Address4,
@@ -394,6 +397,131 @@ namespace BusinessLogic.Data
 
             /* Normal exit */
             return sorted_policies;
+        }
+        
+        public List<VwPolicyCount> GetPolicyReport_ActiveProject()
+        {
+            List<VwPolicyCount> report = new List<VwPolicyCount>();
+
+            /* Row 1 is the header */
+            Project activeProject = _appDbContext.Projects.Where(p => p.IsActive == true).FirstOrDefault();
+            if (activeProject == null) 
+            {
+                throw new Exception("No active project selected.");
+            }
+
+            int sortOrder = 0;
+            int projId = activeProject.ProjectId;
+            int projYear = activeProject.Year;
+            string projName = activeProject.Name;
+            string projType = activeProject.Type;
+            string projCreateDate = activeProject.CreatedDate.ToString("MMM d, yyyy");
+            string projDueDate = activeProject.DueDate.ToString("MMM d, yyyy");
+
+            string header1 = String.Format(
+                "Project Name: {0} - Record Date {1} Project Type: {2} Project Year: {3} Scheduled Mailing Date: {4}",
+                projName, projCreateDate, projType, projYear, projDueDate);
+            string header2 = "All Records Count (including those not on the annual mailing list)";
+
+            report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = header1, Description = String.Empty });
+            report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = header2, Description = String.Empty });
+
+            /* Get count of each Code / Source */
+            var subReport1 =
+                (from s in _appDbContext.Sources.Where(s => s.Division != null)
+                join p in _appDbContext.Policy.Where(p => 
+                    p.UserFlaggedDuplicate == false &&
+                    p.UserFlaggedDeficient == false &&
+                    p.UserFlaggedExclusion == false &&
+                    p.ExactDuplicate == false &&
+                    p.PolicyFeed.Project.IsActive == true) on s.Code equals p.SystemCode into t1
+                from t2 in t1.DefaultIfEmpty()
+                group t2 by new { s.Code, s.Division } into grouped
+                select new
+                {
+                    Code = grouped.Key.Code,
+                    Division = grouped.Key.Division,
+                    Count = grouped.Count(t => t.SystemCode != null)
+                }).ToList();
+
+            foreach (var item in subReport1)
+            {
+                string name = item.Division.ToString() + " - " + item.Code.ToString() + " COUNT:";
+                string count = item.Count.ToString();
+
+                report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = name, Description = count });
+            }
+
+            /* Get count per language */
+            var subReport2 =
+                (from p in _appDbContext.Policy.Where(p =>
+                     p.UserFlaggedDuplicate == false &&
+                     p.UserFlaggedDeficient == false &&
+                     p.UserFlaggedExclusion == false &&
+                     p.ExactDuplicate == false &&
+                     (p.LanguageCode.Trim() == "E" || p.LanguageCode.Trim() == "F") &&
+                     p.PolicyFeed.Project.IsActive == true)
+                 group p by p.LanguageCode into grouped
+                 select new
+                 {
+                     Code = grouped.Key,
+                     Count = grouped.Count(t => t.SystemCode != null)
+                 }).ToList();
+
+            foreach (var item in subReport2)
+            {
+                string name = (item.Code == "E" ? "ENGLISH COUNT:" : "FRENCH COUNT:");
+                string count = item.Count.ToString();
+
+                report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = name, Description = count });
+            }
+
+            /* Get count of each Country */
+            var subReport3 =
+                (from s in _appDbContext.Sources.Where(s => 
+                    s.Division != null &&
+                    (s.Division.ToUpper() == "CANADA" || s.Division.ToUpper() == "UNITED STATES" || s.Division.ToUpper() == "HONG KONG" || s.Division.ToUpper() == "PHILIPPINES"))
+                 join p in _appDbContext.Policy.Where(p =>
+                     p.UserFlaggedDuplicate == false &&
+                     p.UserFlaggedDeficient == false &&
+                     p.UserFlaggedExclusion == false &&
+                     p.ExactDuplicate == false &&
+                     p.PolicyFeed.Project.IsActive == true) on s.Code equals p.SystemCode into t1
+                 from t2 in t1.DefaultIfEmpty()
+                 group t2 by s.Division into grouped
+                 orderby grouped.Key
+                 select new
+                 {
+                     Code = grouped.Key,
+                     Count = grouped.Count(t => t.SystemCode != null)
+                 }).ToList();
+
+            /* Get total count here */
+            int totalCount = 0;
+            foreach (var item in subReport3)
+            {
+                string name = String.Empty;
+                if (item.Code.ToUpper() == "CANADA")
+                    name = "CANADIAN TOTAL COUNT:";
+                else if (item.Code.ToUpper() == "UNITED STATES")
+                    name = "US COUNT:";
+                else if (item.Code.ToUpper() == "HONG KONG")
+                    name = "PHILIPPINES COUNT:";
+                else if (item.Code.ToUpper() == "PHILIPPINES")
+                    name = "HONG KONG COUNT:";
+
+                string count = item.Count.ToString();
+
+                report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = name, Description = count });
+
+                totalCount = totalCount + Int32.Parse(count);
+            }
+
+            /* Other count default to zero */
+            report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = "OTHER COUNT:", Description = "0" });
+            report.Add(new VwPolicyCount { SortOrder = ++sortOrder, Name = "TOTAL COUNT::", Description = totalCount.ToString() });
+
+            return report;
         }
     }
 }

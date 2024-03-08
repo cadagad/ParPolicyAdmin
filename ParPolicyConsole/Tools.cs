@@ -60,6 +60,7 @@ namespace ParPolicyConsole
 
                     List<Policy> policies = policyRepo.PolicyFeed_ToList(feedId, staging_folder);
 
+                    Console.WriteLine(String.Format("File {0} is being processed.", feed));
                     Console.WriteLine(String.Format("Processing {0} records. Please wait.", policies.Count().ToString()));
 
                     int PAGE_SIZE = 5000;
@@ -75,6 +76,8 @@ namespace ParPolicyConsole
                     }
 
                     policyFeedRepo.SetFeedIsProcessed(feedId);
+                    Console.WriteLine(String.Format("File {0} successfully processed!" +
+                        "\n--------------------------------------------------\n\n", feed));
                 }
 
                 DateTime endTime = DateTime.Now;
