@@ -77,6 +77,7 @@
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Data\BarcodeFeedRepo.cs" />
     <Compile Include="Data\BarcodeRepo.cs" />
+    <Compile Include="Data\EmailConfigRepo.cs" />
     <Compile Include="Data\PolicyFeedRepo.cs" />
     <Compile Include="Data\PolicyRepo.cs" />
     <Compile Include="Data\ProjectRepo.cs" />
@@ -116,6 +117,10 @@
     <Compile Include="Migrations\202403111338503_Added Email Config.cs" />
     <Compile Include="Migrations\202403111338503_Added Email Config.Designer.cs">
       <DependentUpon>202403111338503_Added Email Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403111410292_Email Value to max length.cs" />
+    <Compile Include="Migrations\202403111410292_Email Value to max length.Designer.cs">
+      <DependentUpon>202403111410292_Email Value to max length.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnnualMailingList.cs" />
@@ -197,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403111338503_Added Email Config.resx">
       <DependentUpon>202403111338503_Added Email Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403111410292_Email Value to max length.resx">
+      <DependentUpon>202403111410292_Email Value to max length.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

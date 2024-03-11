@@ -15,10 +15,10 @@ namespace BusinessLogic.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(3000)]
         public string Value { get; set; }
 
-        /* Values = Fixed / Dynamic */
+        /* Values = Assigned / Dynamic */
         [Required]
         [MaxLength(20)]
         public string Type { get; set; }

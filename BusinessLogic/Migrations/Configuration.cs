@@ -37,9 +37,42 @@ namespace BusinessLogic.Migrations
                 new Source() { SourceId = 15, Code = "UPV", Division = "United States", Region = "North America", IsActive = true });
 
             context.EmailConfig.AddOrUpdate(
-                new EmailConfig() { EmailConfigId = 1, Name = "Todays Date", Value = String.Empty, Type = "Dynamic" },
-                new EmailConfig() { EmailConfigId = 1, Name = "Project Description", Value = String.Empty, Type = "Dynamic" },
-                new EmailConfig() { EmailConfigId = 1, Name = "Due Date", Value = String.Empty, Type = "Dynamic" });
+                new EmailConfig()
+                {
+                    EmailConfigId = 1, Name = "Email Body", Value =
+@"<<Todays Date>> 
+
+Dear <<Name>>
+<<Email>>
+
+
+Manulife Financial has launched the <<Project Description>>  Project. 
+Please upload your mailing list through the following website:     
+
+<<Website Address>> 
+
+Please use February 16, 2024 as the Record Date and remit by <<Due Date>>
+
+If you have any questions please contact me. 
+
+Email:  <<Support Email>> 
+Tel:  <<Support Phone Local>> (in Toronto) 
+Toll Free:  <<Support Phone toll-free>> 
+
+Thank you for your prompt attention to this matter.
+
+Sincerely,
+
+<<Human Contact Name>>
+<<Sender's Name>>
+<<Sender's Email>>
+<<Sender's Telephone>>", Type = "Assigned" },
+                new EmailConfig() { EmailConfigId = 2, Name = "Email Subject", Value = "Par Policy Project has been created", Type = "Assigned" },
+                new EmailConfig() { EmailConfigId = 3, Name = "Email To", Value = String.Empty, Type = "Assigned" },
+                new EmailConfig() { EmailConfigId = 4, Name = "Email Cc", Value = String.Empty, Type = "Assigned" },
+                new EmailConfig() { EmailConfigId = 5, Name = "Todays Date", Value = String.Empty, Type = "Dynamic" },
+                new EmailConfig() { EmailConfigId = 6, Name = "Project Description", Value = String.Empty, Type = "Dynamic" },
+                new EmailConfig() { EmailConfigId = 7, Name = "Due Date", Value = String.Empty, Type = "Dynamic" });
         }
     }
 }
