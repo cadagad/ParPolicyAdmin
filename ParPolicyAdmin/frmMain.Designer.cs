@@ -31,7 +31,7 @@ namespace ParPolicyAdmin
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panelMain = new System.Windows.Forms.Panel();
-            this.btnLateReturns = new System.Windows.Forms.Button();
+            this.btmEmailConfig = new System.Windows.Forms.Button();
             this.btnAnnualMailingList = new System.Windows.Forms.Button();
             this.btnLoadBarcodes = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@ namespace ParPolicyAdmin
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.Gray;
-            this.panelMain.Controls.Add(this.btnLateReturns);
+            this.panelMain.Controls.Add(this.btmEmailConfig);
             this.panelMain.Controls.Add(this.btnAnnualMailingList);
             this.panelMain.Controls.Add(this.btnLoadBarcodes);
             this.panelMain.Controls.Add(this.btnSubmit);
@@ -67,26 +67,25 @@ namespace ParPolicyAdmin
             this.panelMain.Size = new System.Drawing.Size(220, 661);
             this.panelMain.TabIndex = 0;
             // 
-            // btnLateReturns
+            // btmEmailConfig
             // 
-            this.btnLateReturns.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnLateReturns.FlatAppearance.BorderSize = 0;
-            this.btnLateReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLateReturns.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLateReturns.ForeColor = System.Drawing.Color.Snow;
-            this.btnLateReturns.Image = global::ParPolicyAdmin.Properties.Resources.expired_32;
-            this.btnLateReturns.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLateReturns.Location = new System.Drawing.Point(0, 425);
-            this.btnLateReturns.Name = "btnLateReturns";
-            this.btnLateReturns.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnLateReturns.Size = new System.Drawing.Size(220, 60);
-            this.btnLateReturns.TabIndex = 7;
-            this.btnLateReturns.Text = "  Late Returns";
-            this.btnLateReturns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLateReturns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLateReturns.UseVisualStyleBackColor = true;
-            this.btnLateReturns.Visible = false;
-            this.btnLateReturns.Click += new System.EventHandler(this.btnLateReturns_Click);
+            this.btmEmailConfig.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btmEmailConfig.FlatAppearance.BorderSize = 0;
+            this.btmEmailConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btmEmailConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btmEmailConfig.ForeColor = System.Drawing.Color.Snow;
+            this.btmEmailConfig.Image = global::ParPolicyAdmin.Properties.Resources.expired_32;
+            this.btmEmailConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btmEmailConfig.Location = new System.Drawing.Point(0, 425);
+            this.btmEmailConfig.Name = "btmEmailConfig";
+            this.btmEmailConfig.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btmEmailConfig.Size = new System.Drawing.Size(220, 60);
+            this.btmEmailConfig.TabIndex = 7;
+            this.btmEmailConfig.Text = "  Email Config";
+            this.btmEmailConfig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btmEmailConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btmEmailConfig.UseVisualStyleBackColor = true;
+            this.btmEmailConfig.Click += new System.EventHandler(this.btnLateReturns_Click);
             // 
             // btnAnnualMailingList
             // 
@@ -309,7 +308,7 @@ namespace ParPolicyAdmin
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Label lblFeature;
         private System.Windows.Forms.Label lblLoggedAs;
-        private System.Windows.Forms.Button btnLateReturns;
+        private System.Windows.Forms.Button btmEmailConfig;
     }
 }
 

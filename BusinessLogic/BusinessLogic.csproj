@@ -113,10 +113,15 @@
     <Compile Include="Migrations\202401101501414_AnnualMailingList.designer.cs">
       <DependentUpon>202401101501414_AnnualMailingList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403111338503_Added Email Config.cs" />
+    <Compile Include="Migrations\202403111338503_Added Email Config.Designer.cs">
+      <DependentUpon>202403111338503_Added Email Config.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnnualMailingList.cs" />
     <Compile Include="Models\Barcode.cs" />
     <Compile Include="Models\BarcodeFeed.cs" />
+    <Compile Include="Models\EmailConfig.cs" />
     <Compile Include="Models\Policy.cs" />
     <Compile Include="Models\PolicyFeed.cs" />
     <Compile Include="Models\Project.cs" />
@@ -189,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401101501414_AnnualMailingList.resx">
       <DependentUpon>202401101501414_AnnualMailingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403111338503_Added Email Config.resx">
+      <DependentUpon>202403111338503_Added Email Config.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

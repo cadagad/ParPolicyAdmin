@@ -137,7 +137,7 @@ namespace ParPolicyAdmin
             if (currentUserControl != null)
                 this.panelBody.Controls.Clear();
 
-            currentUserControl = new ucLateReturns(CurrentProject.ProjectId);
+            currentUserControl = new ucEmailConfiguration();
 
             currentUserControl.Dock = DockStyle.Fill;
             this.panelBody.Controls.Add(currentUserControl);

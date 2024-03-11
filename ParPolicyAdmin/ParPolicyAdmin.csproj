@@ -125,6 +125,12 @@
     <Compile Include="UserControls\ucBarcodes.Designer.cs">
       <DependentUpon>ucBarcodes.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucEmailConfiguration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucEmailConfiguration.Designer.cs">
+      <DependentUpon>ucEmailConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucImprovedBarcodes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucBarcodes.resx">
       <DependentUpon>ucBarcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucEmailConfiguration.resx">
+      <DependentUpon>ucEmailConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucImprovedBarcodes.resx">
       <DependentUpon>ucImprovedBarcodes.cs</DependentUpon>

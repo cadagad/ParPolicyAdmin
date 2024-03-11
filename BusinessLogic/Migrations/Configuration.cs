@@ -34,8 +34,12 @@ namespace BusinessLogic.Migrations
                 new Source() { SourceId = 12, Code = "HK1", Division = "Hong Kong", Region = "Asia", IsActive = true },
                 new Source() { SourceId = 13, Code = "PH1", Division = "Philippines", Region = "Asia", IsActive = true },
                 new Source() { SourceId = 14, Code = "U2V", Division = "United States", Region = "North America", IsActive = true },
-                new Source() { SourceId = 15, Code = "UPV", Division = "United States", Region = "North America", IsActive = true }
-                );
+                new Source() { SourceId = 15, Code = "UPV", Division = "United States", Region = "North America", IsActive = true });
+
+            context.EmailConfig.AddOrUpdate(
+                new EmailConfig() { EmailConfigId = 1, Name = "Todays Date", Value = String.Empty, Type = "Dynamic" },
+                new EmailConfig() { EmailConfigId = 1, Name = "Project Description", Value = String.Empty, Type = "Dynamic" },
+                new EmailConfig() { EmailConfigId = 1, Name = "Due Date", Value = String.Empty, Type = "Dynamic" });
         }
     }
 }
