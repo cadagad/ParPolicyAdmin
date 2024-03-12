@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using BusinessLogic.Data;
 using BusinessLogic.Models;
 
+using Outlook = Microsoft.Office.Interop.Outlook;
+
 namespace ParPolicyAdmin.UserControls
 {
     public partial class ucProjects : UserControl
@@ -146,6 +148,31 @@ namespace ParPolicyAdmin.UserControls
                 btnReset.PerformClick();
                 lblSubmitMsg.Visible = true;
                 lblSubmitMsg.Text = "Project successfully added!";
+
+                DialogResult dr = MessageBox.Show(
+                    "Project successfully created!\n Do you want to send email?",
+                    "Confirm",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Information);
+
+                if (dr == DialogResult.Cancel)
+                    return;
+
+                EmailConfigRepo ecr = new EmailConfigRepo();
+                var template = ecr.GetEmailTemplate();
+
+                EmailConfig body = template.Where(t => t.Name == "Email Body").FirstOrDefault();
+                EmailConfig subject = template.Where(t => t.Name == "Email Subject").FirstOrDefault();
+                EmailConfig to = template.Where(t => t.Name == "Email To").FirstOrDefault();
+                EmailConfig cc = template.Where(t => t.Name == "Email Cc").FirstOrDefault();
+
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = app.CreateItem(Outlook.OlItemType.olMailItem);
+                mailItem.Subject = subject.Value;
+                mailItem.To = to.Value;
+                mailItem.CC = cc.Value;
+                mailItem.Body = ecr.getActualEmailBody();
+                mailItem.Display(true);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Models;
+using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,28 @@ namespace BusinessLogic.Data
                 emailConfigList.Where(ecl => ecl.Name == "Due Date").FirstOrDefault().Value = activeProject.DueDate.ToString("MMMM dd, yyyy");
             }
 
+            Project latest = _appDbContext.Projects.OrderByDescending(p => p.CreatedDate).FirstOrDefault();
+            if (latest != null)
+            {
+                emailConfigList.Where(ecl => ecl.Name == "Latest Project").FirstOrDefault().Value = latest.Name;
+            }
+
             emailConfigList.Where(ecl => ecl.Name == "Todays Date").FirstOrDefault().Value = DateTime.Now.ToString("MMMM dd, yyyy");
 
+            return emailConfigList;
+        }
+
+        public List<EmailConfig> GetEmailTemplate()
+        {
+            List<EmailConfig> emailConfigList = _appDbContext.EmailConfig
+                .AsNoTracking()
+                .Where(ecl => 
+                    ecl.Name.Equals("Email Body") || 
+                    ecl.Name.Equals("Email Subject") ||
+                    ecl.Name.Equals("Email To") ||
+                    ecl.Name.Equals("Email Cc"))
+                .OrderBy(ec => ec.Name).ToList()
+                .ToList();
             return emailConfigList;
         }
 
@@ -100,6 +121,29 @@ namespace BusinessLogic.Data
 
             if (hasValue)
                 _appDbContext.SaveChanges();
+        }
+
+        public string getActualEmailBody()
+        {
+            var template = _appDbContext.EmailConfig.Where(ec => ec.Name == "Email Body").FirstOrDefault();
+            if (template == null)
+                return null;
+
+            string emailTemplate = template.Value;
+            var arr = _COM.EnclosedStrings(emailTemplate, "<<", ">>");
+            var confAll = GetAllEmailConfig();
+
+            foreach (string s in arr)
+            {
+                string placeholder = s;
+                string actualValue = String.Empty;
+                var eCon = confAll.Where(ec => ec.Name == placeholder).FirstOrDefault();
+                if (eCon != null)
+                    actualValue = eCon.Value;
+                emailTemplate = emailTemplate.Replace("<<" + s + ">>", actualValue);
+            }
+
+            return emailTemplate;
         }
     }
 }

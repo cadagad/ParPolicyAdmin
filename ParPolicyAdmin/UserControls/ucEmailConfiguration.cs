@@ -127,27 +127,11 @@ namespace ParPolicyAdmin.UserControls
             mailItem.Subject = tbEmailSubject.Text;
             mailItem.To = tbEmailTo.Text;
             mailItem.CC = tbEmailCc.Text;
-            mailItem.Body = getActualEmailBody();
+            mailItem.Body = emailConfigRepo.getActualEmailBody();
             mailItem.Display(true);
         }
 
-        private string getActualEmailBody()
-        {
-            string emailTemplate = tbEmailTemplate.Text;
-            var arr = _COM.EnclosedStrings(emailTemplate, "<<", ">>");
-
-            foreach (string s in arr) 
-            {
-                string placeholder = s;
-                string actualValue = String.Empty;
-                var eCon = EmailConfigs.Where(ec => ec.Name == placeholder).FirstOrDefault();
-                if (eCon != null)
-                    actualValue = eCon.Value;
-                emailTemplate = emailTemplate.Replace("<<" + s + ">>", actualValue);
-            }
-
-            return emailTemplate;
-        }
+        
 
         private void btnSaveTemplate_Click(object sender, EventArgs e)
         {

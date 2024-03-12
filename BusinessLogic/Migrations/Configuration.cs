@@ -72,7 +72,8 @@ Sincerely,
                 new EmailConfig() { EmailConfigId = 4, Name = "Email Cc", Value = String.Empty, Type = "Assigned" },
                 new EmailConfig() { EmailConfigId = 5, Name = "Todays Date", Value = String.Empty, Type = "Dynamic" },
                 new EmailConfig() { EmailConfigId = 6, Name = "Project Description", Value = String.Empty, Type = "Dynamic" },
-                new EmailConfig() { EmailConfigId = 7, Name = "Due Date", Value = String.Empty, Type = "Dynamic" });
+                new EmailConfig() { EmailConfigId = 7, Name = "Due Date", Value = String.Empty, Type = "Dynamic" },
+                new EmailConfig() { EmailConfigId = 8, Name = "Latest Project", Value = String.Empty, Type = "Dynamic" });
         }
     }
 }
