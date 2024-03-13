@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -41,10 +43,32 @@ namespace ParPolicyAdmin.UserControls
             lblMessage.Visible = true;
             if (ret)
             {
+                /* Delete all feeds in staging - assume a backup is already archived from processing */
+                string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
+                if (Directory.Exists(staging_folder))
+                {
+                    System.IO.DirectoryInfo di = new DirectoryInfo(staging_folder);
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                }
+
+                MessageBox.Show(String.Format("Project successfully opened!"),
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 lblMessage.Text = "Open successful!";
             }
             else
             {
+                MessageBox.Show(String.Format("Please archive the current project first."),
+                    "Error!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 lblMessage.Text = "Error : Another project is active";
             }
         }
@@ -69,6 +93,23 @@ namespace ParPolicyAdmin.UserControls
             lblMessage.Visible = true;
             if (ret)
             {
+                /* Delete all feeds in staging - assume a backup is already archived from processing */
+                string staging_folder = ConfigurationManager.AppSettings["PolicyFeed_Staging"];
+                if (Directory.Exists(staging_folder))
+                {
+                    System.IO.DirectoryInfo di = new DirectoryInfo(staging_folder);
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                }
+
+                MessageBox.Show(String.Format("Project successfully archived!"),
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 lblMessage.Text = "Archiving successful";
             }
             else

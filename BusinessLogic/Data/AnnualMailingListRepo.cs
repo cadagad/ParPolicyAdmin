@@ -150,7 +150,7 @@ namespace BusinessLogic.Data
             if (File.Exists(staging_file))
                 File.Delete(staging_file);
 
-            File.Copy(file, staging_file);
+            File.Copy(file, staging_file, true);
 
             if (!File.Exists(staging_file))
                 throw new Exception(String.Format("Error : File {0} does not exist on path {1}", FeedName, Staging));

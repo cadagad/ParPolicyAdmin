@@ -85,12 +85,28 @@ namespace ParPolicyConsole
             else
             {
                 /* If no parameter - process all */
-                Tools tools = new Tools();
-
-                Console.WriteLine("Processing Upload-Policy...");
                 string trigger_policies = Path.Combine(TriggerPath, TriggerFile_LoadFiles);
+                string trigger_annual = Path.Combine(TriggerPath, TriggerFile);
+                var waitTime = TimeSpan.FromSeconds(10);
+
+                if (!File.Exists(trigger_policies) && !File.Exists(trigger_annual))
+                {
+                    Console.WriteLine("No trigger file found for Policy or Annual Mailing\n" +
+                        "--------------------------------------------------\n\n" +
+                        "Expected trigger files\n" +
+                        "Policy         : " + trigger_policies + "\n" +
+                        "Annual Mailing : " + trigger_annual + "\n\n" +
+                        "--------------------------------------------------\n\n" +
+                        "No action required. Closing app...");
+                    
+                    Thread.Sleep(waitTime);
+                    return;
+                }
+
+                Tools tools = new Tools();
                 if (File.Exists(trigger_policies))
                 {
+                    Console.WriteLine("Processing Upload-Policy...");
                     tools.UploadPolicy();
                 }
                 else
@@ -98,34 +114,17 @@ namespace ParPolicyConsole
                     Console.WriteLine("No trigger file found for Policy processing\n" +
                         trigger_policies);
                 }
-
-                Console.WriteLine("Processing Upload-Annual-Mailing-List");
-                string trigger_annual = Path.Combine(TriggerPath, TriggerFile);
+                
                 if (File.Exists(trigger_annual))
                 {
+                    Console.WriteLine("Processing Upload-Annual-Mailing-List");
                     tools.UploadAnnualMailingList();
                     File.Delete(trigger_annual);
                 }
+
+                Thread.Sleep(waitTime);
+                return;
             }
-
-            /* Crude temporary solution */
-            //var waitTime = TimeSpan.FromSeconds(30);
-
-            //while (true)
-            //{
-            //    bool fileFound = false;
-            //    if (File.Exists(@"C:\temp\Feeds.txt"))
-            //    {
-            //        Console.WriteLine("Feeds.txt found....");
-            //        fileFound = true;
-            //    }
-
-            //    if (fileFound == false)
-            //        Console.WriteLine(DateTime.Now.ToShortTimeString() + " : No files found...");
-
-            //    Thread.Sleep(waitTime);
-            //}
         }
-
     }
 }
