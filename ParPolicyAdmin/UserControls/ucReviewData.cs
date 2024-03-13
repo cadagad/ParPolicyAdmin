@@ -52,6 +52,8 @@ namespace ParPolicyAdmin.UserControls
                 dgvSources.Columns["Records"].Visible = false;
                 dgvSources.Columns["Code"].Width = 150;
                 dgvSources.Columns["Code"].HeaderText = "Source";
+                dgvSources.Columns["HasRecords"].Width = 75;
+                dgvSources.Columns["HasRecords"].HeaderText = "DataLoaded";
                 //dgvSources.Columns["Records"].Width = 75;
             }
         }

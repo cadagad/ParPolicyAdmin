@@ -47,7 +47,8 @@ namespace BusinessLogic.Data
                 output.Add(new VwSourceSummaryByProject
                 {
                     Code = r.Code,
-                    Records = r.Records
+                    Records = r.Records,
+                    HasRecords = (r.Records == 0) ? false : true
                 });
             }
 

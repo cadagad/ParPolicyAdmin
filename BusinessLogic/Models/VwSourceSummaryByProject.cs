@@ -11,5 +11,7 @@ namespace BusinessLogic.Models
         public string Code { get; set; }
 
         public int Records { get; set; }
+
+        public bool HasRecords { get; set; }
     }
 }
