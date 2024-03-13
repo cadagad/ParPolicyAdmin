@@ -66,6 +66,7 @@ namespace ParPolicyAdmin.UserControls
             string code = dgvSources.SelectedRows[0].Cells["Code"].Value.ToString();
 
             frmReviewDuplicates frm = new frmReviewDuplicates(code);
+            frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
             frm.Close();
             frm.Dispose();
@@ -79,6 +80,7 @@ namespace ParPolicyAdmin.UserControls
             string code = dgvSources.SelectedRows[0].Cells["Code"].Value.ToString();
 
             frmReviewDeficient frm = new frmReviewDeficient(code);
+            frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
             frm.Close();
             frm.Dispose();
