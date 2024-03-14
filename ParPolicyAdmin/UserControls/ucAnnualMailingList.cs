@@ -40,6 +40,8 @@ namespace ParPolicyAdmin.UserControls
             AnnualMailingListRepo = new AnnualMailingListRepo();
             sourceRepo = new SourceRepo();
             sources = sourceRepo.GetAllSourceCodes();
+            string s = "<All>";
+            sources.Add(s);
 
             BindingSource bs = new BindingSource();
             bs.DataSource = sources;

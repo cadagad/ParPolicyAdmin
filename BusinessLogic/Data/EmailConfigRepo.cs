@@ -86,6 +86,16 @@ namespace BusinessLogic.Data
             }
         }
 
+        public void DeleteEmailTemplate(int emailConfigId)
+        {
+            EmailConfig emailConfig = _appDbContext.EmailConfig.Where(e => e.EmailConfigId == emailConfigId).FirstOrDefault();
+            if (emailConfig != null)
+            {
+                _appDbContext.EmailConfig.Remove(emailConfig);
+                _appDbContext.SaveChanges();
+            }
+        }
+
         public void SaveEmailTemplate(string to, string cc, string subject, string body)
         {
             bool hasValue = false;

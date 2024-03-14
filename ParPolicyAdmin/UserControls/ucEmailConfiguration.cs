@@ -211,5 +211,40 @@ namespace ParPolicyAdmin.UserControls
             frm.Close();
             frm.Dispose();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvEmailConfig.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataGridViewRow selectedRow = dgvEmailConfig.SelectedRows[0];
+            if (selectedRow.Cells["Type"].Value.ToString() == "Dynamic")
+            {
+                MessageBox.Show("Cannot remove a fixed value item.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+            string name = selectedRow.Cells["Name"].Value.ToString();
+
+            DialogResult dr = MessageBox.Show(
+                String.Format("Are you sure you want to remove entry [{0}]?", name),
+                "Confirm",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.Cancel)
+                return;
+
+            emailConfigRepo.DeleteEmailTemplate(id);
+            MessageBox.Show("Configuration item [" + name + "] removed!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            GridRefresh();
+        }
     }
 }

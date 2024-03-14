@@ -46,18 +46,34 @@ namespace BusinessLogic.Data
         {
             List<AnnualMailingList> mailingList = new List<AnnualMailingList>();
 
-            if (String.IsNullOrWhiteSpace(search))
+            if (!code.ToUpper().Contains("ALL"))
             {
-                mailingList = _appDbContext.AnnualMailingList
-                .Where(aml => aml.SystemCode == code)
-                .ToList();
+                if (String.IsNullOrWhiteSpace(search))
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                    .Where(aml => aml.SystemCode == code)
+                    .ToList();
+                }
+                else
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                    .Where(aml => aml.SystemCode == code &&
+                                 (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
+                    .ToList();
+                }
             }
             else
             {
-                mailingList = _appDbContext.AnnualMailingList
-                .Where(aml => aml.SystemCode == code && 
-                             (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
-                .ToList();
+                if (String.IsNullOrWhiteSpace(search))
+                {
+                    mailingList = _appDbContext.AnnualMailingList.ToList();
+                }
+                else
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                    .Where(aml => aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search))
+                    .ToList();
+                }
             }
             
             return mailingList;
@@ -67,20 +83,39 @@ namespace BusinessLogic.Data
         {
             List<AnnualMailingList> mailingList = new List<AnnualMailingList>();
 
-            if (String.IsNullOrWhiteSpace(search))
+            if (!code.ToUpper().Contains("ALL"))
             {
-                mailingList = _appDbContext.AnnualMailingList
-                    .AsNoTracking()
-                    .Where(aml => aml.SystemCode == code)
-                    .ToList();
+                if (String.IsNullOrWhiteSpace(search))
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                        .AsNoTracking()
+                        .Where(aml => aml.SystemCode == code)
+                        .ToList();
+                }
+                else
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                        .AsNoTracking()
+                        .Where(aml => aml.SystemCode == code &&
+                                     (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
+                        .ToList();
+                }
             }
             else
             {
-                mailingList = _appDbContext.AnnualMailingList
-                    .AsNoTracking()
-                    .Where(aml => aml.SystemCode == code &&
-                                 (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
-                    .ToList();
+                if (String.IsNullOrWhiteSpace(search))
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                        .AsNoTracking()
+                        .ToList();
+                }
+                else
+                {
+                    mailingList = _appDbContext.AnnualMailingList
+                        .AsNoTracking()
+                        .Where(aml => aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search))
+                        .ToList();
+                }
             }
 
             return mailingList;
