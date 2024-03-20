@@ -75,7 +75,10 @@ namespace ParPolicyAdmin.UserControls
 
             List<Md.AnnualMailingList> mailings = new List<Md.AnnualMailingList>();
             if (forceRefresh)
-                mailings = AnnualMailingListRepo.GetAnnualMailings_NoTracking_BySystemCode(code, searchText);
+            {
+                AnnualMailingListRepo = new AnnualMailingListRepo();
+                mailings = AnnualMailingListRepo.GetAnnualMailings_BySystemCode(code, searchText);
+            }
             else
                 mailings = AnnualMailingListRepo.GetAnnualMailings_BySystemCode(code, searchText);
 
@@ -298,6 +301,22 @@ namespace ParPolicyAdmin.UserControls
 
             if (dr == DialogResult.Cancel)
                 return;
+
+            if (AnnualMailingListRepo.Delete_AnnualMailings_ById(id))
+            {
+                /* Refresh the Grid after add */
+                string code = cbSystemCode.Text;
+                string searchText = tbSearch.Text;
+
+                /* force refresh */
+                GridRefresh(code, searchText, true);
+
+                MessageBox.Show(
+                    String.Format("Mailing address removed successfully : [{0}]", holder),
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
 
         private void btnUpdateMailing_Click(object sender, EventArgs e)

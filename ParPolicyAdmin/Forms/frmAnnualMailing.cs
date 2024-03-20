@@ -42,7 +42,7 @@ namespace ParPolicyAdmin.Forms
         private void frmAnnualMailing_Load(object sender, EventArgs e)
         {
             sourceRepo = new SourceRepo();
-            sources = sourceRepo.GetAllSourceCodes();
+            sources = sourceRepo.GetAllSourceCodes().Where(s => !s.Equals("Undefined")).ToList();
 
             BindingSource bs = new BindingSource();
             bs.DataSource = sources;
@@ -140,12 +140,23 @@ namespace ParPolicyAdmin.Forms
 
                 if (MailingId == 0)
                 {
-                    aml_repo.Insert_AnnualMailings(aml);
+                    bool ret = aml_repo.Insert_AnnualMailings(aml);
 
-                    MessageBox.Show(String.Format("Mailing for {0} successfully added.", holderName),
-                    "Success!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                    if (ret)
+                    {
+                        MessageBox.Show(String.Format("Mailing for {0} successfully added.", holderName),
+                        "Success!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show(String.Format("Error : Policy number [{0}] already exist.", aml.PolicyNumber),
+                        "Error!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                        return;
+                    }
                 }
                 else
                 {

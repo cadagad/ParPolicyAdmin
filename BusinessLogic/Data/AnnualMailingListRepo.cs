@@ -51,13 +51,13 @@ namespace BusinessLogic.Data
                 if (String.IsNullOrWhiteSpace(search))
                 {
                     mailingList = _appDbContext.AnnualMailingList
-                    .Where(aml => aml.SystemCode == code)
+                    .Where(aml => aml.SystemCode == code && aml.UserFlaggedExclusion != true)
                     .ToList();
                 }
                 else
                 {
                     mailingList = _appDbContext.AnnualMailingList
-                    .Where(aml => aml.SystemCode == code &&
+                    .Where(aml => aml.SystemCode == code && aml.UserFlaggedExclusion != true &&
                                  (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
                     .ToList();
                 }
@@ -66,12 +66,15 @@ namespace BusinessLogic.Data
             {
                 if (String.IsNullOrWhiteSpace(search))
                 {
-                    mailingList = _appDbContext.AnnualMailingList.ToList();
+                    mailingList = _appDbContext.AnnualMailingList
+                        .Where(aml => aml.UserFlaggedExclusion != true)
+                        .ToList();
                 }
                 else
                 {
                     mailingList = _appDbContext.AnnualMailingList
-                    .Where(aml => aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search))
+                    .Where(aml => aml.UserFlaggedExclusion != true && 
+                                 (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
                     .ToList();
                 }
             }
@@ -89,16 +92,15 @@ namespace BusinessLogic.Data
                 {
                     mailingList = _appDbContext.AnnualMailingList
                         .AsNoTracking()
-                        .Where(aml => aml.SystemCode == code)
+                        .Where(aml => aml.SystemCode == code && aml.UserFlaggedExclusion != true)
                         .ToList();
                 }
                 else
                 {
                     mailingList = _appDbContext.AnnualMailingList
                         .AsNoTracking()
-                        .Where(aml => aml.SystemCode == code &&
-                                     (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search)))
-                        .ToList();
+                        .Where(aml => aml.SystemCode == code && aml.UserFlaggedExclusion != true &&
+                                     (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search))).ToList();
                 }
             }
             else
@@ -107,14 +109,15 @@ namespace BusinessLogic.Data
                 {
                     mailingList = _appDbContext.AnnualMailingList
                         .AsNoTracking()
+                        .Where(aml => aml.UserFlaggedExclusion != true)
                         .ToList();
                 }
                 else
                 {
                     mailingList = _appDbContext.AnnualMailingList
                         .AsNoTracking()
-                        .Where(aml => aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search))
-                        .ToList();
+                        .Where(aml => aml.UserFlaggedExclusion != true && 
+                                     (aml.PolicyNumber.Contains(search) || aml.HolderName.Contains(search))).ToList();
                 }
             }
 
@@ -269,10 +272,18 @@ namespace BusinessLogic.Data
             _appDbContext.SaveChanges();
         }
 
-        public void Insert_AnnualMailings(AnnualMailingList mailing)
+        public bool Insert_AnnualMailings(AnnualMailingList mailing)
         {
+            AnnualMailingList aml = _appDbContext.AnnualMailingList
+                .Where(m => m.PolicyNumber == mailing.PolicyNumber).FirstOrDefault();
+            if (aml != null)
+            {
+                return false;
+            }
+
             _appDbContext.AnnualMailingList.Add(mailing);
             _appDbContext.SaveChanges();
+            return true;
         }
 
         public bool DeleteCurrentMailingList()
