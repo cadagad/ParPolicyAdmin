@@ -41,7 +41,10 @@ namespace ParPolicyAdmin.UserControls
             EmailConfigs = emailConfigRepo.GetAllEmailConfig();
 
             sublist = EmailConfigs.Where(e =>
-                e.Name != "Email Body" && e.Name != "Email Subject" && e.Name != "Email To" && e.Name != "Email Cc").ToList();
+                e.Name != "Email Body" && 
+                e.Name != "Email Subject" && 
+                e.Name != "Email To" && 
+                e.Name != "Email Cc").ToList();
 
             var bindingList = new BindingList<EmailConfig>(sublist);
             var source = new BindingSource(bindingList, null);

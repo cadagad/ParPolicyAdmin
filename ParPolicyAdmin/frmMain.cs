@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.DirectoryServices.AccountManagement;
+using System.Configuration;
 
 namespace ParPolicyAdmin
 {
@@ -67,6 +69,53 @@ namespace ParPolicyAdmin
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            /* Login */
+            /* Split domain and user */
+            string[] str = Program.CurrentUser.Split('\\');
+            if (str.Length != 2)
+            {
+                MessageBox.Show("Invalid user : " + Program.CurrentUser, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+
+            string domain = str[0];
+            string user = str[1];
+
+            // Set up domain context
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, domain);
+
+            // Find a user
+            UserPrincipal userPrincipal = UserPrincipal.FindByIdentity(ctx, user);
+
+            // Find the group in question
+            string config = ConfigurationManager.AppSettings["AdminGroup"];
+            string[] adminGroups = config.Split(',');
+            bool isLoggedIn = false;
+
+            if (userPrincipal != null)
+            {
+                foreach (string grp in adminGroups.Where(s => s.ToLower().StartsWith(domain.ToLower())))
+                {
+                    GroupPrincipal groupPrincipal = GroupPrincipal.FindByIdentity(ctx, grp);
+                    if (userPrincipal.IsMemberOf(groupPrincipal))
+                    {
+                        isLoggedIn = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isLoggedIn == false)
+            {
+                MessageBox.Show(String.Format(
+                        "User does not have privilege to access Par Policy\n" +
+                        "[{0}]", Program.CurrentUser),
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                this.Close();
+            }
+            
             UpdateLabels();
             lblLoggedAs.Text = Program.CurrentUser;
         }

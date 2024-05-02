@@ -70,6 +70,7 @@
       <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,6 +93,12 @@
     </Compile>
     <Compile Include="Forms\frmEmailConfigUpdate.Designer.cs">
       <DependentUpon>frmEmailConfigUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmEmailRecepient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEmailRecepient.Designer.cs">
+      <DependentUpon>frmEmailRecepient.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPolicyCountReport.cs">
       <SubType>Form</SubType>
@@ -178,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEmailConfigUpdate.resx">
       <DependentUpon>frmEmailConfigUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEmailRecepient.resx">
+      <DependentUpon>frmEmailRecepient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPolicyCountReport.resx">
       <DependentUpon>frmPolicyCountReport.cs</DependentUpon>

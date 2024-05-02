@@ -118,6 +118,7 @@ namespace ParPolicyAdmin.UserControls
                 if (File.Exists(fn))
                     File.Delete(fn);
 
+                policyFeedRepo = new PolicyFeedRepo();
                 foreach (DataGridViewRow r in dgvFeeds.SelectedRows)
                 {
                     int feedId = (int)r.Cells["PolicyFeedId"].Value;
