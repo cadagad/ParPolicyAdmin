@@ -94,10 +94,10 @@ namespace ParPolicyAdmin
 
             if (userPrincipal != null)
             {
-                foreach (string grp in adminGroups.Where(s => s.ToLower().StartsWith(domain.ToLower())))
+                foreach (string grp in adminGroups.Where(s => s.Trim().ToLower().StartsWith(domain.ToLower())))
                 {
                     GroupPrincipal groupPrincipal = GroupPrincipal.FindByIdentity(ctx, grp);
-                    if (userPrincipal.IsMemberOf(groupPrincipal))
+                    if (groupPrincipal != null && userPrincipal.IsMemberOf(groupPrincipal))
                     {
                         isLoggedIn = true;
                         break;
@@ -108,7 +108,7 @@ namespace ParPolicyAdmin
             if (isLoggedIn == false)
             {
                 MessageBox.Show(String.Format(
-                        "User does not have privilege to access Par Policy\n" +
+                        "User does not to access Par Policy:\n" +
                         "[{0}]", Program.CurrentUser),
                     "Error",
                     MessageBoxButtons.OK,
