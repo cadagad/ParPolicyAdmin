@@ -75,14 +75,27 @@ namespace ParPolicyAdmin
             if (str.Length != 2)
             {
                 MessageBox.Show("Invalid user : " + Program.CurrentUser, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                Environment.Exit(0);
             }
 
             string domain = str[0];
             string user = str[1];
 
+            PrincipalContext ctx = null;
+
             // Set up domain context
-            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, domain);
+            try
+            {
+                ctx = new PrincipalContext(ContextType.Domain, domain);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot connect to Manulife LDAP.\nError : " + ex.Message, 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (ctx == null)
+                Environment.Exit(0);
 
             // Find a user
             UserPrincipal userPrincipal = UserPrincipal.FindByIdentity(ctx, user);
